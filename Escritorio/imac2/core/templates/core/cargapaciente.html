@@ -1,0 +1,235 @@
+{% extends "core/base.html" %} <!-- extiendo de base.htm  -->
+{%block title%}  <title>Pacientes</title>  {%endblock%}
+
+
+
+{% block content %}
+<style>
+     
+            label{
+                color: white;
+            }
+
+            .padre{
+              display: flex;
+              justify-content: center;
+              
+
+            } 
+            .bordes1{
+
+              border-radius: 10px 10px 10px 10px;
+              -moz-border-radius: 10px 10px 10px 10px;
+              -webkit-border-radius: 10px 10px 10px 10px;
+              border: 0px solid #000000;
+
+            }
+            .bordes{
+
+              border-radius: 10px 10px 10px 10px;
+              -moz-border-radius: 10px 10px 10px 10px;
+              -webkit-border-radius: 10px 10px 10px 10px;
+              border: 1px solid #000000;
+
+              }
+
+input{
+  color: black;
+}
+
+</style>
+ 
+
+
+<body>
+<div class="container padre mt-md-5 col-md-9" >
+    
+    <div class="row padre mt-md-5 col-md-12">
+      <div class="card col-md-9 mt-md-5 bordes1 padre" style="background-color:#263238 ; height: 650px; position: relative; top: 50px; ">
+        <form class="mr-md-4 mb-md-3" method="POST" style="position: relative; top: 20px;">
+            {% csrf_token %}
+
+            <div class="row ml-md-3">
+                <div class="form-group col-md-6">
+                    <label for="email">Nombre:</label>
+                    <input type="text" class="form-control bordes" id="email" placeholder="" name="nombre" required="" autocomplete="off" >
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="pwd">Apellido:</label>
+                    <input type="text" class="form-control bordes" id="pwd" placeholder="" name="apellido" required="" autocomplete="off" >
+                  </div>
+
+            </div>
+
+            <div class="row ml-md-3 mt-md-3">
+                <div class="form-group col-md-3">
+                    <label for="email">Dni:</label>
+                    <input type="text" class="form-control bordes" id="email" placeholder="DNI sin puntos" name="dni" onkeypress="return event.charCode >= 48 && event.charCode <= 57 " autocomplete="off" required="">
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="pwd">Nacionalidad:</label>
+                    <input type="text" class="form-control bordes" id="pwd" placeholder=" " name="nacionalidad" required="" autocomplete="off">
+                  </div>
+                  <div class="form-group col-md-3 ">
+                      <label for="sel1">Sexo:</label>
+                      <select class="form-control bordes" id="sel1" name="sexo" required="">
+                        <option>  </option>  
+                        <option>Masculino</option>
+                        <option>Femenino</option>
+                        
+                      </select>
+                    </div> 
+                    <div class="form-group col-md-3">
+                        <label for="pwd">Fecha de Nacimiento:</label>
+                        <input type="date" required="" class="form-control bordes" id="pwd" placeholder="" min="1900-01-01" max="2019-12-31" name="fecha_nacimiento">
+                      </div>
+            </div>
+
+            <div class="row ml-md-3 mt-3">
+
+                
+                  <div class="form-group col-md-4">
+                    <label for="sel1">Cobertura Médica:</label>
+                  <select name="cobertura_medica" id="sel2" required="" class="form-control bordes">
+                        <option>  </option>  
+                        <option>OSECAC</option>
+                        <option>OSPRERA</option>
+                        <option>OSBA</option>
+                        <option>OSPIL</option>
+                        <option>OSMMEDT</option>
+                        <option>OSPENA</option>
+                        <option>OSMATA</option>
+                        <option>OSFATUN</option>
+                        <option>OSALARA</option>
+                        <option>OSPAV</option>
+                        <option>CABOTAJE</option>
+                        <option>OSPACA</option>
+                        <option>OSSIMRA</option>
+                        <option>OSPEDYC</option>
+                        <option>BUQUES</option>
+                        <option>OSETYA</option>
+                        <option>OSPAT</option>
+                        <option>OSPAÑA</option>
+                        <option>JERARQUICOS</option>
+                        <option>OSPIDA</option>
+                        <option>OSPAVIAL</option>
+                        <option>OSMISS</option>
+                        <option>OSPIV</option>
+                        <option>OSTVLA</option>
+                        <option>OSFATLYF</option>
+                        <option>OSCOEMA</option>
+                        <option>OSDE</option>
+                        <option>OSPCN</option>
+                        <option>OSPES</option>
+                        <option>OSPM</option>
+                        <option>OSPEP</option>
+                        <option>OSPAGA</option>
+                        <option>OSPESA</option>
+                        <option>OSME</option>
+                        <option>OSPRA</option>
+                        <option>MEDICOS</option>
+                        <option>OSPERSAAM</option>
+                        <option>OSCEARA</option>
+                        <option>OSTRAC</option>
+                        <option>OSPSIP</option>
+                        <option>ASE</option>
+                        <option>OSEAM</option>
+                        <option>OSPTV</option>
+                        <option>OSPIT</option>
+                        <option>OSUTHGRA</option>
+                        <option>OSPECON</option>
+                        <option>OSPLAD</option>
+                        <option>OSPEC</option>
+                        <option>OSVARA</option>
+                        <option>CAMIONEROS</option>
+                        <option>OSPSA</option>
+                        <option>OSTPCHPYARA</option>
+                        <option>OSMEDICA</option>
+                        <option>OSUTI</option>
+                        <option>OSSACRA</option>
+                        <option>OSDEPYM</option>
+                        <option>OSPIP</option>
+                        <option>OSPICAL</option>
+                        <option>OSPF</option>
+                        <option>VIALES</option>
+                        <option>OSDOP</option>
+                        <option>OSPOCE</option>
+                        <option>OSFE</option>
+                        <option>OSYC</option>
+                        <option>OSPIA</option>
+                        <option>OSPACP</option>
+                        <option>OSPACA</option>
+                        <option>OSPIF</option>
+                        <option>OSPG</option>
+                        <option>OSPIHMP</option>
+                        <option>OSUOMRA</option>
+                        <option>OSAM</option>
+                        <option>OSPIM</option>
+                        <option>OSJONR</option>
+                        <option>OSPE</option>
+                        <option>COLECTIVO</option>
+                        <option>SANCOR</option>
+                        <option>OSIM</option>
+                        <option>MEDIFE</option>
+                        <option>PAMI</option>
+                        <option>JERARQUICOS (EMP)</option>
+                        <option>APOS</option>
+                        <option>SIN OS</option>
+                        <option>OSUNLAR</option>
+                        <option>SWISS MEDICAL</option>
+                        <option>GALENO</option>
+                        <option>RSM</option>
+                        <option>OSDE (EMP)</option>
+                        <option>ACCORD SALUD</option>
+                        <option>MEDICUS</option>
+                        <option>OSDEPYN (EMP)</option>
+                        <option>OSMINT</option>
+                        <option>PREVENCIÓN SALUD</option>
+                        <option>NORTE SALUD</option>
+                        <option>OSPL</option>
+                        <option>OSCHOCA</option>
+                        <option>OSPATCA</option>
+                        <option>OSTEL</option>
+                        <option>BOREAL</option>
+                        <option>MEDIFE</option>
+                        
+
+                      </select>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="pwd">Número de Afiliado:</label>
+                  <input type="text" class="form-control bordes" required="" id="pwd" placeholder="" name="numero_afilido" autocomplete="off">
+                </div>
+              <div class="form-group col-md-4">
+                <label for="pwd">Número de Domicilio:</label>
+                <input type="text" class="form-control bordes" id="pwd" required="" placeholder="" name="numero_domicilio" onkeypress="return event.charCode >= 48 && event.charCode <= 57 " autocomplete="off">
+              </div>
+            </div>
+
+            <div class="row ml-md-3 mt-md-3 mb-md-3">
+              <div class="form-group col-md-12" >
+                <label for="comment">Domicilio:</label>
+                <textarea class="form-control bordes" rows="5" id="comment" required="" name="domicilio"></textarea>
+              </div> 
+            </div>
+              
+            <div class="form-group d-flex " >
+            <a type="submit" href="{% url 'pacienteslistado' %}" class="btn ml-auto button" style="background-color:#0086c3; color:white; font-family: 'Raleway', sans-serif;
+            font-size: large; border-radius: 10px 10px 10px 10px; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius: 10px 10px 10px 10px;"  >Lista de Pacientes</a>
+            <button type="submit" class="btn ml-md-3" style="background-color:#009688; color:white; font-family: 'Raleway', sans-serif;
+            font-size: large; border-radius: 10px 10px 10px 10px; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius: 10px 10px 10px 10px;">Guardar</button>
+            </div>
+        
+        </form>
+
+    </div>
+    </div>
+       
+</div>
+  
+  
+</body> 
+   
+
+
+ {% endblock %} 

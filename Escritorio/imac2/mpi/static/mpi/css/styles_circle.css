@@ -1,0 +1,59 @@
+	
+.blanco{
+
+ filter: brightness(1.5);
+}
+.amarillo{
+
+  -webkit-filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%) contrast(0.7);
+      filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(15000%) contrast(0.7); /*satruate  le dando mas intensidad de color*/
+}
+
+.rosadoClaro{
+-webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+      filter: grayscale(100%) brightness(80%) sepia(100%) hue-rotate(-80deg) saturate(800%) contrast(1);/*0.8*/
+
+}
+
+.rosadoOscuro{
+-webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+      filter: grayscale(100%) brightness(20%) sepia(100%) hue-rotate(-100deg) saturate(1000%) contrast(0.8);
+
+}
+
+.sss_izquierda{
+position: absolute;
+width: 500px;
+height: 450px;
+/*bottom: 0px;*/
+}
+
+.ssr_centro{
+position: absolute;
+width: 500px;
+height: 450px;
+/*bottom: 0px;*/
+left: 500px;
+}
+.ssd_derecha{
+position: absolute;
+width: 500px;
+height: 450px;
+/*bottom: 0px;*/
+left: 1000px;
+}
+ body::after {
+             content: "";
+             background: url('bg-01.jpg');;
+             /*opacity: 0.4;*/
+         background-color: rgba(0,0,0,0.8);
+           filter:brightness(0.4);/*opacidad*/
+             top: 0;
+             left: 0;
+             bottom: 0;
+             right: 0;
+             position: absolute;
+             z-index: -1;   
+           }           
+
+

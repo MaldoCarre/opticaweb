@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Index</title>
+  {% load static %}
+<style>
+	
+
+	.rosadoOscuro{
+-webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+      filter: grayscale(100%) brightness(20%) sepia(100%) hue-rotate(-100deg) saturate(1000%) contrast(0.8);
+
+
+}
+.centrar{
+  margin-left: auto;
+  margin-right: auto;
+}
+.a{
+ border-style: solid;
+  border-color: blac;
+}
+
+</style>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+
+
+</head>
+<body style="font-family: 'Oswald',sans-serif;"  >
+  
+  <div style="page-break-after: always;"> <span style="display: none;">&nbsp;</span>
+  
+  <div class="row p-4">
+    <img src="{% static 'aplicativo/img/oie_transparent.png' %}" alt="" style="width: 200px">
+     <img src="{% static 'aplicativo/img/LOGO IMAC COLOR.jpg' %}" alt=""  style="width: 300px; height: 80px;" class="ml-auto">
+  </div>
+  
+  <div class=" mt-md-2" style=" text-align: center;"> 
+    <h2><span>Cardiología Nuclear</span></h2>
+    <h3>Perfusion Miocardica bajo Apremio con Ejercicio</h3>
+    <h3>Tomografia Computada por Emision de Foton Simple</h3>
+  </div>
+  <br>
+  
+  <!----------------------------------------------------------------------------------->
+{% if estudio %}
+{% for e in estudio %}
+
+<div class="container" style=" left: 200px;position: relative;">
+  <div class="row">
+    
+      <div class="form-inline">
+          <label class="mr-2" >Estudio N°: </label>
+         <input type="text" value="{{e.id_estudio}} " class="mr-5" style="border: 0px;">
+         
+        
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">Fecha: </label>
+          <input type="text" value="{{e.fechaAcutal}}" class="mr-5" style="border: 0px;">
+          
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">DNI:</label>
+          <input type="text" value=" {{e.pacientes.dni}}" class="mr-5" style="border: 0px;">
+          
+      </div>                
+  
+  </div>
+  <!----------------------------------------------------------------------------------->
+  <div class="row">
+    
+      <div class="form-inline">
+          <label  class="mr-2">Apellido y Nombre: </label>
+         <input type="text" value="{{e.pacientes.apellido}} {{e.pacientes.nombre}} " class="mr-1" style="border: 0px;">
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">Edad: </label>
+          <input type="text" value="{{e.edad}}" class="mr-5" style="border: 0px;">
+          
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2 ">Sexo: </label>
+          <input type="text" value=" {{e.pacientes.sexo}}" class="mr-5" style="border: 0px;">
+          
+      </div>                
+  
+  </div>
+
+  <!----------------------------------------------------------------------------------->
+
+  <div class="row">
+    
+      <div class="form-inline">
+          <label class="mr-2" >Cobertura Médica: </label>
+         <input type="text" value="{{e.pacientes.cobertura_medica}}" class="mr-2" style="border: 0px;">
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2 ">Referido por:</label>
+          <input type="text" value="{{e.medico}}" class="mr-5" style="border: 0px;" >
+          
+      </div>  
+                 
+  
+  </div>
+  </div>
+{% endfor %}
+{% else %}
+
+{% endif %}
+
+<br>
+<br>
+  <!----------------------------------------------------------------------------------->
+  <h5><u>Paciente Ambulatorio.Protocolo de dias separados.</u></h5>
+  
+  
+  <br>
+    
+  
+  {% if estudio %}
+  {% for est in estudio %}
+  <table class="table col-md-8 " border="1" style="margin: 0 auto;" bgcolor="white">
+    <thead>
+      <tr>
+        <th colspan="2" style="text-align: center">Indicación de Estudio</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if est.indicacion == 'Diagnóstico de Enfermedad Coronaria'  %}
+      <tr>
+        <th scope="row">Diagnóstico de enfermedad Coronaria</th>
+        <td>X</td>
+      </tr>
+      {% else %}
+      <tr>
+        <th scope="row">Diagnostico de Enfermedad Coronaria</th>
+        <td></td>
+      </tr>
+      {% endif %}
+      {% if est.indicacion == 'Evaluación de la extensión y gravedad de enfermedad coronaria' %}
+      <tr>
+        <th scope="row">Evaluación de la extensión y gravedad de enfermedad coronaria</th>
+        <td>X</td>
+      </tr>
+      {% else %}
+      <tr>
+        <th scope="row">Evaluación de la extensión y gravedad de enfermedad coronaria</th>
+        <td></td>
+      </tr>
+      {% endif %}
+      {% if est.indicacion == 'Evaluación de viabilidad miocárdica' %}
+      <tr>
+        <th scope="row">Evaluación de Viabilidad Miocárdica</th>
+        <td>X</td>
+      </tr>
+      {% else %}
+      <tr>
+        <th scope="row">Evaluación de Viabilidad Miocárdica</th>
+        <td></td>
+      </tr>
+      {% endif %}
+      {% if est.indicacion == 'Estratificación de riesgo post IAM, prequirúrgica, general' %}
+        <tr>
+        <th scope="row">Estratificación de riesgo post IAM, prequirúrgica, general</th>
+        <td>X</td>
+      </tr>
+      {% else %}
+        <tr>
+        <th scope="row">Estratificación de riesgo post IAM, prequirúrgica, general</th>
+        <td></td>
+      </tr>
+      {% endif %}
+      {% if est.indicacion == 'Valoración de dolor precordial agudo' %}
+      <tr>
+        <th scope="row">Valoración de dolor precordial agudo</th>
+        <td>X</td>
+      </tr>
+      {% else %}
+      <tr>
+        <th scope="row">Valoración de dolor precordial agudo</th>
+        <td></td>
+      </tr>
+      {% endif %}
+        
+    </tbody>
+  </table>
+  {% endfor %}
+  {% else %}
+  {% endif %}
+
+  {% if ante %}
+  {% for a in ante %}
+  <br>
+  <h5><u>Historia Clínica</u></h5>
+  <h6>Paciente de {{a.estudio.edad}} años, IMC = {{a.estudio.imc}},
+   {% if a.fcrv_hta and a.ex_tabaquismo %}
+
+    con antecedentes de: HTA hace 1 año, DBT hace 2 años, Tabaquismo
+   {% else %}
+   -. 
+   {% endif %}
+    otros antecendetes como: {{a.otros_antecedentes}}.</h6>
+  {% endfor %}
+  {% else %}
+  {% endif %}
+  <br>
+  <h5><u>Metodología</u></h5>
+  <br>
+  <h6>Se realizó prueba de esfuerzo graduada bajo método escaleriforme continuo en cicloergómetro Enermax®, con volante
+  de inercia de 43cm (50Rpm), registro computarizado continuo y simultaneo de 12 derivaciones con sistema ERGO
+  View®. Al nivel de carga alcanzado, se inyectan entre 8 y 24 mCi de 99mTc-Sestamibi en forma endovenosa, de acuerdo
+  al protocolo utilizado. En un lapso entre 5 y 60 minutos más tarde se adquieren imágenes tomográficas SPECT de 180º
+  en Cámara Gamma Marconi Phillips®, Axis® doble cabezal de ángulo variable con procesador Philips Medical
+  Systems®, Odyssey-LX®. Se reconstruyen las imágenes tomográficas mediante FBP, con una matriz de 64x64 (17 steps)
+  con los detectores a un ángulo de 102°. Se sincroniza la señal del ECG (16 intervalos) en todo estudio que lo permita, la
+  función cardíaca se analiza con 4D-MSPECT®. Posteriormente para la fase de reposo se re-inyectan entre 8 y 24 mCi de
+  99mTc-Sestamibi y se realizan adquisiciones de reposo según protocolo.</h6>
+  
+  <br>
+  <h5><u>Resultados</u></h5>
+  <br>
+  {% if estudio %}
+  {% for es in estudio %}
+  <table border="2"  class="table col-md-8 text-center" style="margin: 0 auto;" >
+    
+    <tr>
+      <td colspan="4">Calidad técnica del estudio*</td>
+      
+    </tr>
+    <tr>
+      {% if es.calidadTecnica == 1 %}
+      <td style="background-color:red;"><u><i><b>Pobre</b></i></u></td>
+      {% else %}
+      <td>Pobre</td>
+      {% endif %}
+      {% if es.calidadTecnica == 2 %}
+      <td style="background-color:#33FFFF;"><u><i><b>Buena</b></i></u></td>
+      {% else %}
+      <td>Buena</td>
+      {% endif %}
+      {% if es.calidadTecnica == 3 %}
+      <td style="background-color:blue;"><u><i><b>Muy buena</b></i></u></td>
+      {% else %}
+      <td>Muy Buena</td>
+      {% endif %}
+      {% if es.calidadTecnica >= 4 %}
+      <td style="background-color:green;"><u><i><b>Excelente</b></i></u></td>
+      {% else %}
+      <td>Excelente</td>
+      {% endif %}
+      
+      
+    </tr>
+    <tr>
+      <td colspan="4"><b>Decúbito Prono</b></td>
+    </tr>
+  </table>
+  {% endfor %}
+  {% else %}
+  {% endif %}
+  {% if ventri %}
+  {% for v in ventri %}
+  <br>
+  <h5><u>Tabla de Resultados</u></h5>
+  <br>
+  <table border="2"  class="table col-md-8 text-center" style="margin: 0 auto;" >
+    
+    <tr>
+      <td colspan="2"><b>SPECT Gatillado</b></td>
+      
+    </tr>
+    <tr>
+      <td >Reposo</td>
+      <td>Apremio</td>
+    </tr>
+     <tr>
+      <td >Fey: {{v.frac_eyeccion_rest}} %, VFD: {{v.vfdvi_rest}} ml, VFS: {{v.fvsvi_m2_rest}} ml.</td>
+      <td>Fey: {{v.frac_eyeccion_stress}} %, VFD: {{v.vfdvi_stress}} ml, VFS: {{v.fvsvi_stress}} ml (30 ml/m2).</td>
+    </tr>
+     <tr>
+      <td >MP: Mayor espacio para motilidad parietal
+  tal cual lo pidieron desde FCDN.</td>
+      <td>MP: Mayor espacio para motilidad parietal tal cual
+  lo pidieron desde FCDN.</td>
+    </tr>
+    <tr>
+      <td ><b>TID: {{v.tid}}</b></td>
+      <td ><b>Dilatación Ventricular Transitoria</b></td>
+    </tr>
+  </table>
+  {% endfor %}
+  {% else %}
+  {% endif %}
+</div>
+ <div style="page-break-after: always;"> <span style="display: none;">&nbsp;</span>
+    
+     <div class="row p-4">
+       <img src="{% static 'aplicativo/img/oie_transparent.png' %}" alt="" style="width: 200px">
+        <img src="{% static 'aplicativo/img/LOGO IMAC COLOR.jpg' %}" alt=""  style="width: 300px; height: 80px;" class="ml-auto">
+     </div>
+     
+     <div class=" mt-md-2" style=" text-align: center;"> 
+       <h2><span>Cardiología Nuclear</span></h2>
+       <h3>Perfusion Miocardica bajo Apremio con Ejercicio</h3>
+       <h3>Tomografia Computada por Emision de Foton Simple</h3>
+     </div>
+     <br>
+     {% if estudio %}
+{% for e in estudio %}
+
+<div class="container" style=" left: 200px;position: relative;">
+  <div class="row">
+    
+      <div class="form-inline">
+          <label class="mr-2" >Estudio N°: </label>
+         <input type="text" value="{{e.id_estudio}} " class="mr-5" style="border: 0px;">
+         
+        
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">Fecha: </label>
+          <input type="text" value="{{e.fechaAcutal}}" class="mr-5" style="border: 0px;">
+          
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">DNI:</label>
+          <input type="text" value=" {{e.pacientes.dni}}" class="mr-5" style="border: 0px;">
+          
+      </div>                
+  
+  </div>
+  <!----------------------------------------------------------------------------------->
+  <div class="row">
+    
+      <div class="form-inline">
+          <label  class="mr-2">Apellido y Nombre: </label>
+         <input type="text" value="{{e.pacientes.apellido}} {{e.pacientes.nombre}} " class="mr-1" style="border: 0px;">
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">Edad: </label>
+          <input type="text" value="{{e.edad}}" class="mr-5" style="border: 0px;">
+          
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2 ">Sexo: </label>
+          <input type="text" value=" {{e.pacientes.sexo}}" class="mr-5" style="border: 0px;">
+          
+      </div>                
+  
+  </div>
+
+  <!----------------------------------------------------------------------------------->
+
+  <div class="row">
+    
+      <div class="form-inline">
+          <label class="mr-2" >Cobertura Médica: </label>
+         <input type="text" value="{{e.pacientes.cobertura_medica}}" class="mr-2" style="border: 0px;">
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2 ">Referido por:</label>
+          <input type="text" value="{{e.medico}}" class="mr-5" style="border: 0px;" >
+          
+      </div>  
+                 
+  
+  </div>
+  </div>
+{% endfor %}
+{% else %}
+{% endif %}
+     <br>
+     <br>
+     <h5><u>Gráfico de Resultados</u></h5>
+     <div class="row p-4">
+       {% if mpi %}
+       {% for m in mpi %}
+       <table border="2"  class="table col-md-4 text-center"  >
+         
+         <tr>
+           <td colspan="2"><b>SCORE de Perfusión</b></td>
+           
+         </tr>
+         <tr>
+           <td >Apremio</td>
+           <td>Reposo</td>
+         </tr>
+          <tr>
+           <td >SSS: {{m.sss}}(11%).</td>
+           <td>SSR: {{m.ssr}}(5%).</td>
+         </tr>
+        
+         <tr>
+           
+           <td colspan="2" ><b>SD: {{m.ssd}} (5%).
+       (Isquemia Moderada)</b></td>
+         </tr>
+       </table>
+       {% endfor %}
+       {% else %}
+       {% endif %}
+       <div class="offset-2">
+         <img src="{% static 'aplicativo/img/2.JPG' %}" alt="" width="200">
+         <img src="{% static 'aplicativo/img/1.JPG' %}" alt="" width="200">
+       </div>
+     </div>
+     <h6>SSS: Puntaje de suma de apremio, SSR: Puntaje de suma de reposo y SD: Diferencia entre estos. Fey: fracción de
+     eyección, VFD: Volumen de fin de diástole, VFS: Volumen de fin de sístole, MP: Motilidad parietal, TID: Dilatación
+     isquémica transitoria.</h6>
+     <br>
+     <h5><u>Interpretación</u></h5>
+     
+     
+     
+     <div class="row p-4">
+       
+       <table border="2"  class="table col-md-4 text-center"  >
+         
+        
+         <tr>
+           <td >Estudio sin hallazgos patológicos</td>
+           <td>X</td>
+         </tr>
+          <tr>
+           <td >Estudio con hallazgos patológicos</td>
+           <td></td>
+         </tr>
+        
+         
+       </table>
+       
+          <table border="2"  class="table col-md-4 text-center offset-1"  >
+         
+        
+         <tr>
+           <td >Actividad extra cardíaca</td>
+           <td width="30">SI</td>
+         </tr>
+          <tr>
+           <td >Captación Pulmonar</td>
+           <td>NO</td>
+         </tr>
+         <tr>
+           <td >Atenuación</td>
+           <td>NO</td>
+         </tr>
+        
+         
+       </table>
+       
+     </div>
+     
+     <h6>
+       <ul>
+         
+         <li>
+         {% if ergo %}
+         {% for e in ergo %}
+           A los niveles de carga alcanzados ({{e.carga}} %Grad/Km/h, ITT: {{e.itt}}, FCMP: {{e.percent_fcmp}} %), se evidenció:hipocaptación de radioactividad en 3 segmentos del total de 17 analizados.
+         {% endfor %}
+         {% else %}
+         {% endif %}
+         </li>
+         <li>
+           Se observó compromiso del VI en los segmentos: Apex, Septal Apical, Anterior Basal. 1) Con compromiso
+     necrótico no transmural (5%) en Territorio DA y en Territorio CD. 2) Con isquemia 5% (Riesgo Moderado),
+     en Territorio DA.
+     
+         </li>
+         <li>
+           La Fracción de Eyección presenta Deterioro Leve, además, se observa Dilatación Ventricular Transitoria.
+         </li>
+       </ul>
+     
+     
+     Nota: Estamos llegando al final
+     Actividad extra cardíaca
+     Guzzo Miguel Angel
+     Médico Cardiólogo Nuclear
+     MP: 81078ARN: 21257/0/2 /08-19.
+     
+     </h6>
+ </div>
+  
+  
+  <div style="page-break-after: always;"> <span style="display: none;">&nbsp;</span> </div>
+    
+      <div class="row p-4">
+        <img src="{% static 'aplicativo/img/oie_transparent.png' %}" alt="" style="width: 200px">
+         <img src="{% static 'aplicativo/img/LOGO IMAC COLOR.jpg' %}" alt=""  style="width: 300px; height: 80px;" class="ml-auto">
+      </div>
+      
+      <div class=" mt-md-2" style=" text-align: center;"> 
+        <h2><span>Cardiología Nuclear</span></h2>
+        <h3>Perfusion Miocardica bajo Apremio con Ejercicio</h3>
+        <h3>Tomografia Computada por Emision de Foton Simple</h3>
+      </div>
+      <br>
+        <!----------------------------------------------------------------------------------->
+{% if estudio %}
+{% for e in estudio %}
+
+<div class="container" style=" left: 200px;position: relative;">
+  <div class="row">
+    
+      <div class="form-inline">
+          <label class="mr-2" >Estudio N°: </label>
+         <input type="text" value="{{e.id_estudio}} " class="mr-5" style="border: 0px;">
+         
+        
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">Fecha: </label>
+          <input type="text" value="{{e.fechaAcutal}}" class="mr-5" style="border: 0px;">
+          
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">DNI:</label>
+          <input type="text" value=" {{e.pacientes.dni}}" class="mr-5" style="border: 0px;">
+          
+      </div>                
+  
+  </div>
+  <!----------------------------------------------------------------------------------->
+  <div class="row">
+    
+      <div class="form-inline">
+          <label  class="mr-2">Apellido y Nombre: </label>
+         <input type="text" value="{{e.pacientes.apellido}} {{e.pacientes.nombre}} " class="mr-1" style="border: 0px;">
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2">Edad: </label>
+          <input type="text" value="{{e.edad}}" class="mr-5" style="border: 0px;">
+          
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2 ">Sexo: </label>
+          <input type="text" value=" {{e.pacientes.sexo}}" class="mr-5" style="border: 0px;">
+          
+      </div>                
+  
+  </div>
+
+  
+  <!----------------------------------------------------------------------------------->
+  
+  
+  <div class="row">
+    
+      <div class="form-inline">
+          <label class="mr-2" >Cobertura Médica: </label>
+         <input type="text" value="{{e.pacientes.cobertura_medica}}" class="mr-2" style="border: 0px;">
+      </div>  
+      <div class="form-inline" >
+          <label class="mr-2 ">Referido por:</label>
+          <input type="text" value="{{e.medico}}" class="mr-5" style="border: 0px;" >
+          
+      </div>  
+                 
+  
+  </div>
+  </div>
+{% endfor %}
+{% else %}
+{% endif %}
+
+
+  <!----------------------------------------------------------------------------------->
+      
+      <table border="2"  class="table col-md-8 text-center" style="margin: 0 auto;" >
+        
+        <tr>
+          <td colspan="2"><b>Información para el médico de Cabecera</b></td>
+          
+        </tr>
+      
+        </table>
+        <pre class="form-inline" >
+      <div>
+
+
+    <b>  1. Interpretación diagnóstica y valor pronóstico</b>
+      El informe de nuestros estudios de cardiología nuclear está basado
+      en guías de interpretación actuales1, se utiliza un modelo de
+      segmentación miocárdica y nomenclatura estandarizado para la
+      adquisición tomográfica de imágenes del corazón2. Se divide al
+      ventrículo izquierdo en 17 segmentos (figura), luego se cuantifica el
+      monto de hipocaptación de radioactividad en cada segmento y se
+      procede a la sumatoria de los mismos de acuerdo al puntaje de suma
+      dA107e apremio y reposo (SSS y SSR respectivamente). 
+      Se calcula el porcentaje de miocardio afectado para valoración pronóstica3.
+      Tanto los puntajes de extensión de enfermedad como los de
+      cuantificación de monto isquémico, necrótico o de dilatación
+      transitoria (TID) otorgan valor pronóstico5.
+
+      <img src="{% static 'aplicativo/img/ejes.jpeg' %}" alt="no se cargó la imagen :(">
+      Figura. DA: Descendente Anterior, Cx: Circunfleja, CD: Coronaria Derecha.
+      </div>
+     <div>
+        <b>3. Pronóstico</b> 
+        El valor pronóstico se encuentra indicado por la
+        cantidad de segmentos comprometidos (figura) y
+        la gravedad en el defecto de perfusión, esto
+        último está representado por el SSS (gráfico).
+        El puntaje de SSS mayor a 8, un porcentaje de
+        miocardio comprometido superior a 15% y un
+        puntaje de isquemia (SD) superior a 8
+        representan elevada probabilidad de eventos.
+        El TID (dilatación isquémica transitoria) puede
+        ser valorado mediante un índice que se compone
+        del cociente entre el volumen del VI en el
+        apremio, sobre el de reposo, se analiza sobre
+        imágenes no gatilladas y habitualmente ronda
+        entre 1.2 a 1.3.1
+        <img src="{% static 'aplicativo/img/barras.jpeg' %}" alt="no se cargó la imagen :(">
+        Gráfico. IM: Infarto de Miocárdio, M: Mortalidad.
+      </div>
+<div>
+    2.Calidad técnica
+    a. Los estudios de cardiología nuclear pueden verse afectados en su
+    rédito diagnóstico de acuerdo a variables como:
+    • Hábito y peso corporal del paciente.
+    • Carga alcanzada.
+    • Regularidad del ritmo cardíaco.
+    • Tipo de apremio seleccionado.
+    • Movimiento, en aquellas personas que posean dificultades para
+    permanecer estáticos durante al menos 15 minutos en decúbito
+    supino o prono, tos, afección osteomuscular entre otras
+    enfermedades.
+    </div>
+       <div>                                                                                       
+              Referencias
+              1) Nuclear cardiology: guidance on the implementation 
+              of SPECT myocardial perfusion imaging.
+              IAEA Human Health Series No. 23 (Rev. 1). 2016
+              2) AHA Scientific Statement Circ. 2002;
+               105:539ASNC Consensus Statement J Nucl Cardiol 2006;
+              13:e152-71,1071.
+              3) A. Abidov, R. Hachamovitch, D. Berman Minerva Cardioangiologica 2004;
+               52:5005.
+              4) Berman, Hachamovitch et.all Am J Cardiol 1997;
+              79 (12B)
+              5) ASNC Imaging Guidelines For Nuclear Cardiology Procedures J Nucl Cardiol 2010.
+    
+    		</div>
+
+</div>
+     </pre>
+
+ <!-- ************************************************este es el script que imprime******************************************************************************** -->
+   <script language="javascript">
+
+
+
+    function imprimir()
+    {
+    	$("#ocultar").hide();
+      $("#alv").hide();
+     if (window.print) window.print()
+     else alert("puede utilizar Crtl+p");
+    }
+   </script>
+  
+  <center id="ocultar">
+   <p><input type="button"  class="btn btn-primary" name="imprimir" id="a" value="Generar PDF" onClick="javascript:imprimir();"></p>
+  </center>
+  <center>
+  <a class="btn  btn-success" href="{% url 'home' %}" id="alv">Volver a pagina principal</a>
+  </center>
+<!-- *********************************************************************************************************************************************** -->
+</body>
+</html>

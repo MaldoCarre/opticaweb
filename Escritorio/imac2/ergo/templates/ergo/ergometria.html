@@ -1,0 +1,330 @@
+{% extends "core/base.html" %}
+{%block title%} <title>Ergometria</title>{%endblock%}
+{% block content %}
+{% load static %} <!-- Override files  -->
+ <!-- ******************************************************************INCLUYENDO ARCHIVOS ESTATICOS*********************************************************** -->
+<link rel="stylesheet" href="{% static 'ergo/css/estilosErgometria.css' %}">
+<script src="{% static 'ergo/js/funcionesErgometria.js' %}"></script>
+
+<style>
+  
+  .boton
+{
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 0 25px;
+    border-radius: 15px 0 0 15px;
+}
+
+.boton2
+{
+    position: relative;
+    border-radius: 0 15px 15px 0; width: 50px; height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background :#263238;
+    color: white;
+}
+
+.padre{
+	display: flex;
+  	justify-content: center;
+
+}
+.bordes1{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+}
+
+.bordes{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 1px solid #000000;
+}
+
+body{
+   overflow-x: hidden;
+}
+
+label{
+ 		color: white;
+ 	}
+
+ 
+</style>
+
+<div class="container mt-md-4 col-md-12">
+		<div class="row d-flex">
+			<form class="form-inline" method="GET">
+				{% csrf_token %}
+				 <div class="row  " >
+					<input type="text" class=" boton ml-md-4 mt-md-5" placeholder="Buscar Paciente" name="q"  >
+					<button type="submit" class="boton2 mt-md-5"><i class="fa fa-search"></i></button>
+				 </div>
+			</form>
+			<form method="POST" class="ml-auto mt-md-5 ">
+					<div class="form-group col-md-12 d-flex mb-md-3 mt-md-3">
+							<a type="button" href="{% url 'listaergo' %}" class="btn ml-auto mr-md-2 " style="width: 230px;height: 45px; background-color:#0086c3; color:white; font-family: 'Raleway', sans-serif;
+							font-size: large; border-radius: 10px 10px 10px 10px; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius: 10px 10px 10px 10px;"  >Lista de Ergometrias</a>
+							
+							</div>
+			</form>
+			
+		
+			
+		</div>	
+</div>
+
+<!-- ***************************************************************FORMULARIO ESTUDIO***************************************************************************** -->
+
+<div class="table-wrapper-scroll-y my-custom-scrollbar table-responsive-sm mt-md-2 ">
+  <table class="table table-dark table-hover table-striped "id="table" data-toggle="table" data-height="200"  >
+    <thead style="background-color: #009688;">
+      <tr>
+       <th>Paciente</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>DNI</th>
+          <th>Cobertura medica</th>
+          <th>Numero de afiliado</th>
+          
+      </tr>
+    </thead>
+    <tbody>
+      {% if eventos %}
+    {% for k in eventos %}
+  <tr>
+      <th><input type="radio" value="{{k.pacientes.id_pac}}" name="d" fechaNacimiento="{{k.pacientes.fecha_nacimiento}}" idEstudio="{{k.id_estudio}}" nombre="{{k.pacientes.nombre}} {{k.pacientes.apellido}}"></th>
+          <td>{{k.pacientes.nombre}}</td>
+          <td>{{k.pacientes.apellido}}</td>
+          <td>{{k.pacientes.dni}}</td>
+          <td>{{k.pacientes.cobertura_medica}}</td>
+          <td>{{k.pacientes.numero_afilido}}</td>
+         
+    </tr>
+    {% endfor %}
+    {% else %}
+    {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<form method="POST" onsubmit="return validar();">
+	{% csrf_token %}
+	
+	<input type="text" name="paciente_ergo" id="id_pac_ergo" style="display:none;">
+	  <input type="text" name="estudio" id="id_pac_estudio" style="display:none;">
+
+<div class="row padre">
+	<div class="card col-md-9 padre bordes1 mb-md-4 mt-md-5 " style="background-color: #263238; font-size: medium;">
+
+				<div class="row mt-5 ml-5 mr-4	" >
+
+					<div class="col-md-3 mt-5 form-group ">
+								
+									<input class="form-check-input " type="radio" name="ciclo_ergo" id="CicloErgonometro"  onchange="IngresoErgometria(this.value, this.id);" required="">
+									<label class="form-check-label"  for="autoSizingCheck"> CICLO ÉRGONOMETRO(Kgm)</label>
+						
+					</div>
+					
+					<div class="col-md-3 form-group">	
+							<label class="control-label" for="inlineFormInput">Carga</label>
+							<input  type="text" class="form-control bordes" id="icarga" name="carga" autocomplete="off" onkeyup="asignarCarga(this.value);" required="" title="En caso de error seleccionar todo y borrar">
+					</div>
+
+					<div class="col-md-3 form-group">
+					
+								<label class="control-label " for="inlineFormInput">ST</label>
+								<select class="form-control bordes" name="st" id="1" required="">
+										<option value="">Seleccione</option>  
+										<option value="NO">NO</option>
+										<option value="Supradesnivel">Supradesnivel</option>
+										<option value="Infradesnivel Asc">Infradesnivel Asc.</option>
+										<option value="Infradesnivel Desc">Infradesnivel Desc.</option>
+									  </select>
+					</div>
+					
+					<div class="col-md-3 form-group"> 
+								<label class="control-label " for="inlineFormInput">ST(mm)</label>
+											<!-- <input type="text" class="form-control bordes ml-md-2 col-md-4" name="st_mm"> -->
+											<select class="form-control ml-sm-2 mr-sm-2  bordes" id="2" name="st_mm"  required="">
+												<option value="">Seleccione</option>  
+												<option value="0">0</option>
+												<option value="0.5">0,5</option>
+												<option value="1">1</option>
+												<option value="1.5">1,5</option>
+												<option value="2">2</option>
+												<option value="2.5">2,5</option>
+												<option value="3">3</option>
+												<option value="3.5">3,5</option>
+												<option value="4">4</option>
+												<option value=">4">>4</option>
+											  </select>
+					</div>
+						  
+				</div> 	
+			
+				<div class="row mt-3 ml-5 mr-4" >
+						
+					<div class="col-md-3 form-group mt-4 ">
+								
+									<input class="form-check-input " type="radio" id="bandaDeslizante" onchange="IngresoErgometria(this.value, this.id);"  name="banda_ergo"   required="">
+									<label class="form-check-label" for="autoSizingCheck"> BANDA DESLIZANTE(%Grad/Km/h)</label>
+								
+					</div>
+					
+					<div class="col-md-3 form-group">
+							<label class="control-label  " for="inlineFormInput">METS</label>
+							<input type="text" class="form-control  bordes" id="3" name="mets"  required="" autocomplete="off" maxlength="4" >
+					</div>
+
+					<div class="col-md-3 form-group">
+					
+								<label class="control-label " for="inlineFormInput">TAS BASAL</label>
+								<input type="text" class="form-control  bordes" id="4" name="tas_basal" required="" autocomplete="off" maxlength="3">
+					</div>
+					
+					<div class="col-md-3 form-group"> 
+								<label class="control-label " for="inlineFormInput">TAS ESFUERZO</label>
+											<input type="text" class="form-control  bordes " id="itas_esfuerzo" name="tas_esfuerzo" onchange="calcular();"  required="" autocomplete="off" maxlength="3">
+					</div>
+						 
+				</div> 
+			
+				<div class="row form-group mt-3 ml-4 mr-4 d-flex" >
+						
+				  <div class="form-group ml-auto col-md-3">
+												<label class="control-label" for="inlineFormInput">TAD BASAL</label>
+												<input type="text" class="form-control bordes " name="tad_basal" id="5" required="" autocomplete="off" maxlength="3">
+										
+							  </div>
+					<div class="col-md-3 form-group ml-2" >
+											<label class="control-label" for="inlineFormInput">TAD ESFUERZO</label>
+											<input type="text" class="form-control bordes" name="tad_esfuerzo" id="6"  required="" autocomplete="off" maxlength="3">
+											 
+									 </div>
+				  
+				</div>
+					
+				<div class="row form-group mt-3 ml-4 mr-4">
+						
+				<div class= "col-md-3 form-group">
+								<label  for="inlineFormCustomSelectPref">FC BASAL:</label>
+								<input type="text" class="form-control bordes" name="fc_basal" id="7" required="" autocomplete="off" maxlength="3">
+				  </div>
+				
+					 <div class="col-md-3 form-group">
+								<label for="inlineFormCustomSelectPref">FC ESFUERZO:</label>
+								<input type="text" class="form-control bordes"  id="ifc_esfuerzo" name="fc_esfuerzo" onchange="calcular();" required="" autocomplete="off"  maxlength="3">
+			  </select></div>
+				<div class="col-md-3 form-group" >
+								<label class="" for="inlineFormCustomSelectPref">TA PLANA:</label>
+								 <!-- <input type="text" class="form-control ml-sm-2" id="inlineFormInput" name="ta_plana"> -->
+								 <select class="form-control bordes" id="8" name="ta_plana"  required="">
+									<option value="">Seleccione</option>  
+									<option value="SI">SI</option>
+									<option value="NO">NO</option>
+								  </select>
+								 </div>
+						<div class="col-md-3 form-group"> 
+							<label class="control-label " for="inlineFormInput">FCM-EDAD:</label>
+							<input type="text" class="form-control bordes" id="ifcm"  name="fcm_edad"  required title="El calculo de FCM-EDAD se realizara automaticamente." readonly="" autocomplete="off">
+										 </div>
+						 
+				  
+				</div> 
+			
+				<div class="row form-group mt-3 ml-4 mr-4">
+						
+				<div class="col-md-3 form-group ">
+								<label  for="inlineFormCustomSelectPref">MOTIVO DE SUSPENCIÓN</label>
+								<!-- <input type="text" class="form-control ml-sm-2" id="inlineFormInput" name="motivo_suspencion"> -->
+								<select class="form-control bordes" id="9" name="motivo_suspencion"  required="">
+									<option value="">Seleccione</option>  
+									<option value="Completó Protocolo">Completó Protocolo</option>
+									<option value="Agotamiento Muscular">Agotamiento Muscular</option>
+									<option value="Arritmia Ventricular">Arritmia Ventricular</option>
+									<option value="Descenso TA">Descenso TA</option>
+									<option value="Angor">Angor</option>
+									<option value="Disnea">Disnea</option>
+									<option value="ST">ST</option>
+									<option value="Arritmia SV">Arritmia SV</option>
+									
+								  </select>
+			
+						  </div>
+				<div class="col-md-3 form-group">
+								<label for="inlineFormCustomSelectPref">SINTOMAS</label>
+								  <!-- <input type="text" class="form-control ml-sm-2" id="inlineFormInput" name="sintomas"> -->
+								  <select class="form-control bordes" id="10" name="sintomas" required="">
+									<option value="">Seleccione</option>  
+									<option value="Angor">Angor</option>
+									<option value="Disnea">Disnea</option>
+									<option value="Otros">Otros</option>
+								  </select>
+								  </div>
+						<div class="col-md-3 form-group ml-auto"> 
+							<label class="control-label" for="inlineFormInput">%FCPM:</label>
+										<input type="text" class="form-control bordes" id="ifcmp" name="percent_fcmp"  required title="El calculo de %FCPM se realizara automaticamente." readonly="">
+										 </div>
+						 
+				  
+				</div> 
+			
+				<div class="row form-group mt-3 ml-4 mr-4">
+						
+				<div class="col-md-4 form-group">
+								<label for="inlineFormCustomSelectPref">ARRITMIA SV</label>
+								<!-- <input type="text" class="form-control ml-sm-2" id="inlineFormInput" name="arritmia_sv"> -->
+								<select class="form-control bordes" id="11" name="arritmia_sv" required="">
+									<option value="">Seleccione</option>  
+									<option value="FA">EV</option>
+									<option value="TPS">Compleja</option>
+									<option value="TAQUI">TAQUI</option>
+								  </select>
+			
+						  </div>
+				
+						 <div class="col-md-4 form-group">
+								<label for="inlineFormCustomSelectPref">ARRITMIA V</label>
+								<!-- <input type="text" class="form-control ml-sm-2" id="inlineFormInput" name="arritmia_v"> -->
+								<select class="form-control bordes " id="12" name="arritmia_v" required="">
+									<option value="">Seleccione</option>  
+									<option value="EV">EV</option>
+									<option value="Compleja">Compleja</option>
+									<option value="TV">TV</option>
+								  </select>
+								</div>
+			
+						<div class="col-md-4 form-group"> 
+							<label class="control-label " for="inlineFormInput">ITT:</label>
+							<input type="text" class="form-control bordes" id="iitt" name="itt"  required=""  readonly title="El calculo de ITT se realiza automaticamente." >
+										 </div>
+			
+				</div>
+				
+				<div class="form-group d-flex mt-3 mb-5 mr-5" >
+					
+					<button type="button" onclick="ValidarEnvioFormulario();" class="btn ml-auto" style="width: 120px;height: 45px; background-color:#009688; color:white; font-family: 'Raleway', sans-serif;
+					font-size: large; border-radius: 10px 10px 10px 10px; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius: 10px 10px 10px 10px;">Guardar</button>
+					</div>
+					<button id="enviarFormulario" style="display:none;"></button>
+				
+				
+	</div> 
+	
+</div>
+
+
+
+</form>
+
+{% endblock %}

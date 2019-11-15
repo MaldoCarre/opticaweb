@@ -1,0 +1,51 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+<style>
+
+        .padre{
+            display: flex;
+           justify-content: center;
+           align-items: center;
+        
+        }
+        
+        .bordes1{
+        
+        border-radius: 10px 10px 10px 10px;
+        -moz-border-radius: 10px 10px 10px 10px;
+        -webkit-border-radius: 10px 10px 10px 10px;
+        border: 0px solid #000000;
+        
+        }
+        
+        </style>
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+  <div class="container mt-md-5">
+      <div class="row mt-md-5 padre ">
+        <div class="card mt-md-5 col-md-5 padre bordes" style=" background-color:#263238; color: white; top:200px; border-radius: 10px 10px 10px 10px;-moz-border-radius: 10px 10px 10px 10px;-webkit-border-radius: 10px 10px 10px 10px;border: 0px solid #000000;">
+            
+       <div class="container mt-md-4 ml-md-3 ">
+        
+        <div class="row col-md-12 mb-md-3">
+            {{form.estudio.label_tag}}
+            {{form.estudio}}
+        </div>
+       
+       <div class="row col-md-12">
+        {{form.imagendicom.label_tag}} 
+        {{form.imagendicom}}
+        
+       </div> 
+       <div class="row d-flex mb-md-4 col-md-12">
+            <button type="submit" class=" btn mt-md-4 ml-auto bordes" style="width: 170px;height: 40px; background-color: #009688; color: white; border-radius: 10px 10px 10px 10px;-moz-border-radius: 10px 10px 10px 10px;-webkit-border-radius: 10px 10px 10px 10px;border: 0px solid #000000;">Actualizar Imágen</button>
+       </div>
+       </div> 
+    
+        </div>
+      </div>
+  </div>
+{% endblock content %}

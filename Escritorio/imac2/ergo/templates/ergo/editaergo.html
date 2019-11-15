@@ -1,0 +1,199 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+
+</style>
+
+
+
+
+<form method="POST">
+	{% csrf_token %}
+	
+<div class="container padre col-md-10 mt-5">
+	<div class="card mt-5 col-md-12 bordes1" style="background-color: #263238; ">
+				<div class="mt-5 ml-md-5 form-group form-inline " style="display: none;">
+					{{form.paciente_ergo}}
+					{{form.estudio}}
+				</div>
+
+				<div class="row ml-2 mr-2 mt-3">
+				
+				
+				<div class="col-md-3 mt-5 form-inline">
+								
+							  
+									
+								{{form.ciclo_ergo}}
+								<label class="form-check-label ml-2" for="autoSizingCheck"> CICLO ÉRGONOMETRO(Kgm)</label>
+							
+				</div>
+				
+
+				<div class="form-group col-md-3 mt-3">
+						  <label class="control-label ml-sm-2 mr-sm-2" for="inlineFormInput">Carga</label>
+						   {{form.carga}}
+				</div>
+				
+				<div class="col-md-3 mt-3 form-group">
+				
+							<label class="control-label ml-sm-2 mr-sm-2" for="inlineFormInput">ST</label>
+							{{form.st}}
+				</div>
+				
+				<div class="col-md-3 mt-3 form-group"> 
+							<label class="control-label ml-sm-2 mr-sm-2" for="inlineFormInput">ST(mm)</label>
+										{{form.st_mm}}
+				</div>
+						 
+				  
+				</div> 
+			
+				<div class="row mr-2">
+						
+				<div class="col-md-3 mt-5 form-inline">
+							  <div class="form-check">
+								{{form.banda_ergo}}
+								<label class="form-check-label ml-2" for="autoSizingCheck"> BANDA DESLIZANTE(%Grad/Km/h)</label>
+							 </div> 
+				</div>
+				
+				<div class="col-md-3 mt-3 form-group">
+						  <label class="control-label ml-sm-2 mr-sm-2" for="inlineFormInput">METS</label>
+						   {{form.mets}}
+				
+				</div>
+		
+				<div class="col-md-3 mt-3 form-group">
+				
+							<label class="control-label ml-sm-2 mr-sm-2" for="inlineFormInput">TAS BASAL</label>
+							{{form.tas_basal}}
+				</div>
+
+				
+				
+				<div class="col-md-3 mt-3 form-group"> 
+							<label class="control-label ml-sm-2 mr-sm-2" for="inlineFormInput">TAS ESFUERZO</label>
+										{{form.tas_esfuerzo}}
+				</div>
+						 
+				  
+				</div> 
+			
+				<div class="row ml-2 mr-2">
+						
+				
+					
+				  <div class="col-md-3 mt-3 form-group ml-auto">
+						  
+										<label class="control-label ml-sm-2 mr-sm-2" for="inlineFormInput">TAD BASAL</label>
+										  {{form.tad_basal}}
+							  </div>
+					<div class="col-md-3 mt-3 form-group">
+											<label class="control-label ml-sm-2 mr-sm-2" for="inlineFormInput">TAD ESFUERZO</label>
+											{{form.tad_esfuerzo}}
+											 
+									 </div>
+				  
+				</div>
+			
+				<div class="row mr-2 ml-2">
+						
+				<div class="col-md-3 mt-3 form-group ">
+								<label  for="inlineFormCustomSelectPref">FC BASAL</label>
+								{{form.fc_basal}}
+			
+			
+						  </div>
+				
+					 <div class="col-md-3 mt-3 form-group ">
+								<label for="inlineFormCustomSelectPref">FC ESFUERZO</label>
+								{{form.fc_esfuerzo}}
+			  </div>
+				<div class="col-md-3 mt-3 form-group ">
+								<label for="inlineFormCustomSelectPref">TA PLANA</label>
+								 {{form.ta_plana}}
+								 </div>
+						<div class="col-md-3 mt-3 form-group"> 
+							<label class="control-label " for="inlineFormInput">FCM-EDAD:</label>
+							{{form.fcm_edad}}
+										 </div>
+						 
+				  
+				</div> 
+			
+				<div class="row mr-2 ml-2">
+						
+				<div class="col-md-3 mt-3 form-group ">
+								<label for="inlineFormCustomSelectPref">MOTIVO DE SUSPENCIÓN</label>
+								{{form.motivo_suspencion}}
+			
+			
+						  </div>
+				<div class="col-md-3 mt-3 form-group ">
+								<label for="inlineFormCustomSelectPref">SINTOMAS</label>
+								  {{form.sintomas}}
+								  </div>
+						<div class="col-md-3 mt-3 form-group ml-auto"> 
+							<label class="control-label " for="inlineFormInput">%FCPM:</label>
+										{{form.percent_fcmp}}
+										 </div>
+						 
+				  
+				</div> 
+			
+				<div class="row mr-2 ml-2">
+						
+				<div class="col-md-3 mt-3 form-group">
+								<label  for="inlineFormCustomSelectPref">ARRITMIA SV</label>
+								{{form.arritmia_sv}}
+			
+			
+						  </div>
+				
+						 <div class="col-md-3 mt-3 form-group">
+								<label class=" mr-4" for="inlineFormCustomSelectPref">ARRITMIA V</label>
+								{{form.arritmia_v}}
+								</div>
+			
+						<div class="col-md-3 mt-3 form-group ml-auto"> 
+							<label class="control-label " for="inlineFormInput">ITT:</label>
+							{{form.itt}}
+										 </div>
+			
+				</div> 
+			
+				<div class="row ml-auto mb-3 mt-3 mr-4"> 
+								<button type="submit" class="btn ml-auto bordes1" style="width: 120px;height: 45px;  background-color:#009688 ; color: white;" > Guardar</button>
+						 
+				</div>
+	</div>
+</div>
+
+</form>
+ <style>
+ 	
+ 	label{
+ 		color: white;
+ 	}
+	 .padre{
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+
+}
+
+.bordes1{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+
+}
+
+
+ </style>
+{% endblock content %}

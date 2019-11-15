@@ -1,0 +1,75 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<style>
+
+.boton
+{
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 0 25px;
+    border-radius: 15px 0 0 15px;
+}
+
+.boton2
+{
+    position: relative;
+    border-radius: 0 15px 15px 0;
+    width: 50px;
+    height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background :#263238;
+    color: white;
+}
+
+</style>
+
+<form class="form-inline mt-5"  method="GET">
+    {% csrf_token %}
+      
+        <input type="text mt-5" class=" mt-md-4 ml-md-3 boton" placeholder="Buscar paciente.." name="q" >
+        <button type="submit mt-5" class=" mt-md-4 boton2"><i class="fa fa-search"></i></button>
+     
+</form>
+<br>
+<table class="table table-dark "id="table" data-toggle="table" data-height="300"  >
+    <thead style="background-color:#009688 ;">
+      <tr>
+          
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>DNI</th>
+          <th>Cobertura medica</th>
+          <th>Numero de afiliado</th>
+          <th>Editar</th>
+          <th>Borrar</th>
+
+      </tr>
+    </thead> 
+
+   <tbody>
+  {% for pac in eventos  %}
+ <tr>
+        
+          <td>{{pac.nombre}}</td>
+          <td>{{pac.apellido}}</td>
+          <td>{{pac.dni}}</td>
+          <td>{{pac.cobertura_medica}}</td>
+          <td>{{pac.numero_afilido}}</td>
+         <td><a class="btn btn-info" href="{% url 'editapac' pac.id_pac %}" >Editar</a></td>
+		<td><a   class='btn btn-danger eliminar' href="{% url 'borrarpac' pac.id_pac %}" >Borrar</a></td>
+   </tr>
+  
+  {% endfor %}
+     </tbody>
+     </table>
+{% endblock content %}
+
+   
+     
+  

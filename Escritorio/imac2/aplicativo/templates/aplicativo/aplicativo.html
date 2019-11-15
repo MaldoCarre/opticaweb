@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	{% extends "core/base.html" %} <!-- extiendo de base.htm  -->
+	{%block title%}  <title>Pre-Informe</title>  {%endblock%}
+
+	{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Raleway:600i&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+{% load static %}
+<style type="text/css">
+
+body{
+  font-family: 'Raleway', sans-serif;
+  font-size: large;
+}
+		fieldset {
+					border: 1px solid #ddd;
+				}
+
+		legend {
+					background-color: #fff;
+					border: 1px solid #ddd;
+					border-radius: 4px;
+					color: var(--purple);
+					font-size: 17px;
+					font-weight: bold;
+					padding: 3px 5px 3px 7px;
+					width: auto;
+				}
+
+        .navbar .dropdown-toggle, .navbar .dropdown-menu a {
+    cursor: pointer;
+}
+
+.navbar .dropdown-item.active, .navbar .dropdown-item:active {
+    color: inherit;
+    text-decoration: none;
+    background-color: inherit;
+}
+
+.navbar .dropdown-item:focus, .navbar .dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+@media (min-width: 767px) {
+    .navbar .dropdown-toggle:not(.nav-link)::after {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-left: .5em;
+        vertical-align: 0;
+        border-bottom: .3em solid transparent;
+        border-top: .3em solid transparent;
+        border-left: .3em solid;
+    }
+}
+
+.padre{
+	display: flex;
+  	justify-content: center;
+
+}
+
+label{
+
+	color: white;
+}
+
+.bordes1{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+
+}
+
+.bordes2{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 1px solid #000000;
+
+}
+
+
+</style>
+
+
+
+
+</head>
+
+<body>
+
+<form  method="POST">
+	{% csrf_token %}
+<!------------------------------------Datos Personales--------------------------------------->
+<div class="row padre mt-5">
+	<fieldset class="col-md-7 mt-5 bordes1" style="font-size: medium; background-color: #263238;">
+	<legend class="ml-1 col-md-3 bordes1" style="background-color: #009688; color: white;border-color: #009688; font-size: large;">Datos Personales</legend>		
+			
+	
+	{%if estudio %}
+	{% for e in estudio %}
+<div class="container">
+						
+		<div class="row mt-4">
+									<div class="form-group col-md-4 ">
+											<label class="" >Estudio N°: </label>
+											<input type="text" class="form-control bordes2 col"  id="inlineFormInput" name="fc_esfuerzo" value='{{e.id_estudio}}' readonly>
+									</div>
+									<div class=" form-group col-md-4">
+											<label class="control-label" >Fecha: </label>
+											<input type="text" class="form-control bordes2 col "  id="inlineFormInput" name="fc_esfuerzo" value='{{e.fechaAcutal}}' readonly>
+									</div>
+									<div class="form-group col-md-4">
+											<label class="control-label">Apellido y Nombre: </label>
+											<input type="text" class="form-control bordes2 col"  id="inlineFormInput" name="fc_esfuerzo" value='{{e.pacientes.nombre}} {{e.pacientes.apellido}}' readonly>
+									</div>
+		</div>
+				
+		{% endfor %}
+		{% else %}
+		<h1>No hay Datos de Estudio</h1>
+		{% endif %}
+		{% for k in estudio %}
+
+		<div class="row mt-4 ">
+
+					<div class=" col-md-3 ">
+							<label class="control-label" >F. de Nacimiento: </label>
+							<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{k.pacientes.fecha_nacimiento}}' readonly>
+					</div>	
+
+					<div class=" col-md-3 " >
+							<label class="control-label">DNI: </label>
+							<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{k.pacientes.dni}}' readonly> 
+					</div>
+
+					<div class=" col-md-3">
+							<label class=" control-label">Sexo: </label>
+							<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{k.pacientes.sexo}}' readonly>
+					</div>
+
+					<div class=" col-md-3">
+						<label class=" control-label ">Cobert. Médica: </label>
+						<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{k.pacientes.cobertura_medica}}' readonly>
+					</div>
+														
+		</div>	
+			
+		<div class="row d-flex mt-4 mb-3 mr-md-2">
+			
+		</div>
+
+</div>
+						
+					
+			{% endfor %}
+	</fieldset>	
+</div>
+<!------------------------------------Datos Médicos--------------------------------------->
+<div class="padre">
+	<fieldset class="col-md-7 mt-md-5 bordes1" style="font-size: medium; background-color: #263238; ">
+
+		<legend class="ml-md-1 col-md-3 bordes1" style=" background-color: #009688; color: white;border-color: #009688; font-size: large;">Datos Médicos</legend>		
+		
+		<div class="container mb-md-2 mt-md-2 ">
+		
+				
+				
+				<div class="row mt-4">
+				{% if estudio %}
+							
+						{% for e in estudio %}
+						
+						
+						<div class="col-md-3" >
+								<label class="control-label">Referido por: </label>
+								<input type="text" class="form-control col bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.medico}}' readonly>
+						</div>	
+						<div class="col-md-3">
+								<label class="control-label">Peso (Kg.): </label>
+								<input type="text" class="form-control col bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.peso}}' readonly>
+						</div>
+						<div class=" col-md-3">
+							<label class=" control-label">Talla (cm): </label>
+							<input type="text" class="form-control col bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.talla}}' readonly>
+					</div>
+					<div class=" col-md-3" >
+						<label class=" control-label">Edad (Años): </label>
+						<input type="text" class="form-control col bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.edad}}' readonly>
+				</div>										
+				</div>
+		
+				<div class="row mt-4">
+							
+						
+						<div class="col-md-4">
+								<label class=" control-label">IMC: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.imc}}' readonly>
+						</div>
+						<div class="col-md-4">
+							<label class=" control-label ">Sup. Corporal: </label>
+							<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.supCorporal}}' readonly>
+					</div>
+					<div class="col-md-4" >
+						<label class=" control-label ">Indicación de Estudio: </label>
+						<input type="text" class="form-control bordes2 " id="inlineFormInput" name="fc_esfuerzo" value='{{e.indicacion}}' readonly>
+				</div>									
+				</div>
+		
+				<div class="row mt-4">
+							
+							
+						<div class="col-md-4">
+								<label class=" control-label">Calidad Técnica: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.calidadTecnica}}' readonly>
+						</div>
+						<div class="col-md-4">
+							<label class=" control-label">Decubito: </label>
+							<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.decubito}}' readonly>
+					</div>	
+					<div class="col-md-4" >
+							<label class=" control-label">Perimetro Abdominal (cm): </label>
+							<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.perimetroAbdominal}}' readonly>
+					</div>										
+				</div>
+		
+				<div class="row d-flex mt-4 mb-3">
+						<a href="{% url 'editaestudio2' e.id_estudio %}" class="mr-3 btn btn-info ml-auto" style="width: 100px;height: 40px; border-color:#009688 ; background-color: #009688;">Editar</a>
+				</div>
+		
+		</div>		
+					
+				 {% endfor %}
+				 {% else %}
+				 <center><h1 style="color:white"> No existe datos medicos de este paciente </h1></center>
+				{% endif %}
+	</fieldset>	
+</div>
+<!------------------------------------Antecedentes Pátologicos--------------------------------------->		
+<div class="padre">
+	<fieldset class="col-md-7 form-group  mt-md-5 bordes1" style="font-size: medium; background-color: #263238; ">   	
+				<legend class="ml-md-1 col-md-4 bordes1" style="background-color: #009688; color: white;border-color: #009688; font-size: large;">Antecedentes Patologicos</legend>	
+							
+							{% for a in ante %}	
+							<div class="row ml-2 mr-2 mt-3">
+								<div class="form-group col-md-4 ">
+										<label class=" control-label ">HTA: </label>
+										{% if a.fecha_fcrv_hta == none %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='No tiene HTA'>
+										{% else %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{a.fecha_fcrv_hta}}'>
+										{% endif %}
+								</div>	
+								<div class="form-group col-md-4" >
+										<label class=" control-label">DBT: </label>
+										{% if a.fecha_fcrv_dta == none %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value="No tiene DBT">
+										{% else %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value={{a.fecha_fcrv_dta}}>
+										{% endif %}
+										
+								</div>	
+								<div class="form-group col-md-4" >
+										<label class=" control-label">FCRV: </label>
+										{% if a.fcrv_dta == False %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="{{a.fcrv_dta}}" value="No">
+										{% else %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="{{a.fcrv_dta}}" value="Si">
+										{% endif %}
+										
+								</div>								
+							</div>
+			
+							<div class="row ml-2 mt-2 mr-2">
+								<div class="form-group col-md-4 ">
+										<label class=" control-label">Infarto: </label>
+										{% if a.infarto == False %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='No'>
+										{% else %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='Si'>
+										{% endif %}
+										
+								</div>	
+								<div class="form-group col-md-4" >
+										<label class=" control-label">ATC: </label>
+										{% if a.atc1 == False %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value="No">
+										{% else %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value="Si">
+										{% endif %}
+										
+								</div>	
+								<div class="form-group col-md-4">
+										<label class=" control-label">CRM: </label>
+										{% if a.crm_hta == False %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" value="No">
+										{% else %}
+										<input type="text" class="form-control bordes2" id="inlineFormInput" value="Si">
+										{% endif %}
+										
+								</div>									
+							</div>
+
+							<div class="row ml-2 mt-2 mr-2">
+									<div class="form-group col-md-4 ">
+											<label class=" control-label">CRM (PM,PR,PV): </label>
+											<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo">
+									</div>	
+									<div class="form-group col-md-8" >
+											<label class=" control-label">Otros Antecedentes: </label>
+											
+											<textarea name="" class="form-control bordes2" placeholder="{{a.otros_antecedentes}}" rows="4" id="inlineFormInput" ></textarea>
+									</div>	
+												
+							</div>
+
+							<div class="form-group col-md-12 d-flex mb-3">
+							<a href="{% url 'editaantec2' a.id_antecedentes %}" class="btn btn-info ml-auto mr-2" style="width: 100px;height: 40px; background-color: #009688; color: white;border-color: #009688; font-size: large;">Editar</a>
+					</div>
+				
+							{% endfor %}
+							
+							
+	</fieldset>	
+</div>
+<!------------------------------------Función Cardiaca--------------------------------------->
+<div class="padre">
+		<fieldset class="col-md-7 form-group  mt-md-5 bordes1" style="font-size: medium; background-color: #263238; ">     	
+			<legend class="ml-md-1 col-md-3 bordes1" style="background-color: #009688; color: white;border-color: #009688; font-size: large;">Función Cardiaca</legend>	
+		{% if ventri %}
+		{% for f in ventri  %}				
+			
+				<h4 class="ml-md-4 mt-2" style="color: white;">Apremio</h4>
+		
+						<div class="row mr-2 ml-2">
+							<div class="row col-md-4 ml-1 ">
+									<label class=" control-label mt-5" >Fracción de Eyección %: </label>
+									<input type="text" class="form-control col-md-10 bordes2" id="FEApremio" name="fc_esfuerzo" value='{{f.frac_eyeccion_stress}}'>
+									<img id="img" class="ml-2 mt-2" style="display: none;" width="20" height="40" src="{% static 'aplicativo/img/Imagen1.png' %}" />
+									<img id="img2" class="ml-2 mt-2" style="display: none;" width="20" height="40" src="{% static 'aplicativo/img/Imagen2.png' %}" />	
+							</div>	
+							<div class="form-group col-md-4 mt-md-5 ml-1" >
+									<label class=" control-label ">Vol. Relativo: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.vol_relat_stress}}'>
+							</div>	
+							<div class="form-group col-md-4 mt-md-5" >
+									<label class=" control-label ">VFDVI: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.vfdvi_stress}}'>
+							</div>								
+						</div>
+		
+						<div class="row mt-2 ml-2 mr-2">
+							<div class="form-group col-md-4 mt-2 ">
+									<label class=" control-label ">VFDVI/m2: </label>
+									<input type="text" class="form-control bordes2 " id="inlineFormInput" name="fc_esfuerzo" value='{{f.vfdvi_m2_stress}}'>
+							</div>	
+							<div class="form-group col-md-4 mt-md-2" >
+									<label class=" control-label">FVSVI: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.fvsvi_stress}}'>
+							</div>	
+							<div class="form-group col-md-4 mt-md-2">
+									<label class=" control-label ">FVSVI/m2: </label>
+									<input type="text" class="form-control bordes2 " id="inlineFormInput" name="fc_esfuerzo" value='{{f.fvsvi_m2_stress}}'>
+							</div>									
+						</div>
+					
+					
+						
+				
+			
+					<h4 class="ml-md-4 mt-md-5 mb-5" style="color: white;">Reposo</h4>
+			
+							<div class="row mt-2 ml-2 mr-2">
+								<div class="form-group col-md-3 mt-md-2">
+										<label class=" control-label">Fracción de Eyección %: </label>
+										<input type="text" class="form-control bordes2" id="FEReposo" name="fc_esfuerzo" value='{{f.frac_eyeccion_rest}} ' > 
+										<div id="flecha"></div>
+								</div>	
+								<div class="form-group col-md-3 mt-md-2 " >
+										<label class=" control-label ">Vol. Relativo: </label>
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.vol_relat_rest}}'>
+								</div>	
+								<div class="form-group col-md-3 mt-md-2" >
+										<label class=" control-label ">VFDVI: </label>
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.vfdvi_rest}}'>
+								</div>		
+								<div class="form-group col-md-3 mt-md-2" >
+										<label class=" control-label ">TID: </label>
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.tid}}'>
+								</div>						
+							</div>
+			
+							<div class="row mt-2 mr-2 ml-2">
+								<div class="form-group col-md-4 mt-md-2 ">
+										<label class=" control-label  ">VFDVI/m2: </label>
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.vfdvi_m2_rest}}'>
+								</div>	
+								<div class="form-group col-md-4 mt-md-2" >
+										<label class=" control-label ">FVSVI: </label>
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.fvsvi_rest}}'>
+								</div>	
+								<div class="form-group col-md-4 mt-md-2">
+										<label class=" control-label ">FVSVI/m2: </label>
+										<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{f.fvsvi_m2_rest}}'>
+								</div>									
+								<div class="form-group d-flex col-md-12 mb-3 mt-3">
+									<td><a href="{% url 'editafv' f.id_func_vent %}" class="btn btn-info ml-auto" style="width: 100px;height: 40px; background-color: #009688; color: white;border-color: #009688; font-size: large;"><span class="glyphicon glyphicon-question-sign"></span>Editar</a></td>
+								</div>	
+							
+							</div>
+						
+						
+						
+							
+				
+			{% endfor %}
+			{% else %}
+			<center><h1 style="color:white"> No existe antecedentes de este paciente </h1></center>
+			{% endif %}
+			
+</fieldset>	
+</div>
+<!------------------------------------Script--------------------------------------->
+<script>
+						var FEA=$("#FEApremio").val();
+						var FER=$("#FEReposo").val();
+
+						
+						if (FEA-FER ==1) {
+							// $("flecha").html("<img src='{% static 'aplicativo/img/Imagen1.png' %}' />");
+							$("#img").css('display','');
+						} else{
+							$("#img2").css('display','');
+						}
+</script>
+<!------------------------------------Ergometría--------------------------------------->
+<div class="padre">
+		<fieldset class="col-md-7 form-group mt-md-5 bordes1" style="font-size: medium; background-color: #263238; ">  
+
+				<legend class="ml-md-1 col-md-3 bordes1" style="background-color: #009688; color: white;border-color: #009688; font-size: large;">Ergometría</legend>		
+		{% if ergo %}
+		{% for e in ergo %}
+
+		<div class=" container ">
+		
+				<div class="row mt-2">
+							<div class="form-group col-md-4  ">
+									<label class=" control-label  ">Carga: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.carga}}'>
+							</div>	
+							<div class="form-group col-md-4  " >
+									<label class=" control-label ">FC Basal: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.fc_basal}}'>
+							</div>	
+							<div class="form-group col-md-4 " >
+									<label class=" control-label ">TAS Basal: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.tas_basal}}'>
+							</div>								
+				</div>
+		
+				<div class="row ">
+							<div class="form-group col-md-4 mt-2">
+									<label class=" control-label ">TAD Basal: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.tad_basal}}'>
+							</div>	
+							<div class="form-group col-md-4 mt-md-2" >
+									<label class=" control-label ">FCM - Edad: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.fcm_edad}}'>
+							</div>	
+							<div class="form-group col-md-4 mt-md-2">
+									<label class=" control-label ">FC Esfuerzo: </label>
+									<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.fc_esfuerzo}}'>
+							</div>									
+				</div>	
+				
+				<div class="row ">
+						<div class="form-group col-md-4 mt-md-2 ">
+								<label class=" control-label ">TAS Esfuerzo: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.tas_esfuerzo}}'>
+						</div>	
+						<div class="form-group col-md-4 mt-md-2" >
+								<label class=" control-label ">TAD Esfuerzo: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.tad_esfuerzo}}'>
+						</div>	
+						<div class="form-group col-md-4 mt-md-2">
+								<label class=" control-label ">% FCMP: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.percent_fcmp}}'>
+						</div>									
+				</div>
+		
+				<div class="row ">
+						<div class="form-group col-md-4 mt-md-2  ">
+								<label class=" control-label  ">ITT: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.itt}}'>
+						</div>	
+						<div class="form-group col-md-4 mt-md-2" >
+								<label class=" control-label ">METS: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.mets}}'>
+						</div>	
+						<div class="form-group col-md-4 mt-md-2">
+								<label class=" control-label ">ST: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.st}}'>
+						</div>									
+				</div>
+		
+				<div class="row ">
+						<div class="form-group col-md-4 mt-md-2 ">
+								<label class=" control-label">ST (mm): </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.st_mm}}'>
+						</div>	
+						<div class="form-group col-md-4 mt-md-2" >
+								<label class=" control-label ">TA Plana: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.ta_plana}}'>
+						</div>	
+						<div class="form-group col-md-4 mt-md-2">
+								<label class=" control-label ">Motivo Susp.: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.motivo_suspencion}}'>
+						</div>									
+				</div>
+		
+				<div class="row ">
+						<div class="form-group col-md-4 mt-md-2  ">
+								<label class=" control-label  ">Arritmia SV: </label>
+								<input type="text" class="form-control bordes2 " id="inlineFormInput" name="fc_esfuerzo" value='{{e.arritmia_sv}}'>
+						</div>	
+						<div class="form-group col-md-4 mt-md-2" >
+								<label class=" control-label">Arritmia V: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.arritmia_v}}'>
+						</div>	
+						<div class="form-group col-md-4 mt-md-2" >
+								<label class=" control-label ">Síntomas: </label>
+								<input type="text" class="form-control bordes2" id="inlineFormInput" name="fc_esfuerzo" value='{{e.sintomas}}'>
+						</div>	
+						<div class="form-group d-flex col-md-12 mt-md-2 ">
+							<td><a href="{% url 'editaergo2' e.id_ergo %}" class="btn btn-info ml-auto mb-3" style="width: 100px;height: 40px; background-color: #009688; color: white;border-color: #009688; font-size: large;"><span class="glyphicon glyphicon-question-sign"></span>Editar</a></td>
+						</div>													
+				</div>
+		
+		</div>					
+		{% endfor %}
+		{% else %}
+		<center><h1 style="color:white"> No existe datos de ergometria de este paciente </h1></center>
+		{% endif %}
+</fieldset>
+</div>	
+<!------------------------------------Cámara Gamma--------------------------------------->
+<div class="padre">
+		<fieldset class="col-md-7 form-group form-inline mt-md-5 bordes1" style="font-size: medium; background-color: #263238; ">     	
+	<legend class="ml-md-1 col-md-3 bordes1" style="background-color: #009688; color: white;border-color: #009688; font-size: large;">Camara Gamma</legend>		
+	{% if mpi %}
+	{% for m in mpi %}
+		<div class="row">
+		<!-- ---------------tabla 1------------------------------- -->
+		<table border=""  class="table col-md-4 " style="margin: 0 auto; border-width: 0px;" >
+		<tr><td  colspan="5" class="text-center" style="border-width: 0px; color: white; left: 40px; position: relative;" > TERRITORIO DA</td></tr>
+			<tr>
+
+			<td style="border-width: 0px; "  width="30" ></td>
+			<td width="10" bgcolor="#FFFF00">A</td>
+			<td width="10" bgcolor="#FFFF00">R</td>
+			<td width="10" bgcolor="#FFFF00">D</td>
+			<td  width="10" style="border-width: 0px;"></td>
+			</tr>
+		
+		<tr>
+			<td style="border-width: 0px; color: white" class="text-center" >Anterior Basal</td>
+			<td bgcolor="white" >{{m.s1_stress}}</td>
+			<td bgcolor="white" >{{m.s1_rest}}</td>
+			<td bgcolor="white" >{{m.s1_dif}}</td>
+			<td style="border-width: 0px; color: white" >S1</td>
+			</tr>
+			<tr >
+			<td style="border-width: 0px; color: white" class="text-center">Anteroseptal Basal</td>
+			<td bgcolor="white">{{m.s2_stress}}</td>
+			<td bgcolor="white">{{m.s2_rest}}</td>
+			<td bgcolor="white">{{m.s2_dif}}</td>
+			<td style="border-width: 0px; color: white" >S2</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px; color: white"class="text-center">Anterior Medio</td>
+			<td bgcolor="white">{{m.s7_stress}}</td>
+			<td bgcolor="white">{{m.s7_rest}}</td>
+			<td bgcolor="white">{{m.s7_dif}}</td>
+			<td style="border-width: 0px; color: white" >S7</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px; color: white" class="text-center">Anteroseptal Medio</td>
+			<td bgcolor="white">{{m.s8_stress}}</td>
+			<td bgcolor="white">{{m.s8_rest}}</td>
+			<td bgcolor="white">{{m.s8_dif}}</td>
+			<td style="border-width: 0px; color: white" >S8</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px; color: white" class="text-center">Anteroseptal Apical</td>
+			<td bgcolor="white">{{m.s13_stress}}</td>
+			<td bgcolor="white">{{m.s13_rest}}</td>
+			<td bgcolor="white">{{m.s13_dif}}</td>
+			<td style="border-width: 0px; color: white" >S13</td>
+			</tr>
+			<tr >
+			<td style="border-width: 0px; color: white" class="text-center">Septal Apical</td>
+			<td bgcolor="white">{{m.s14_stress}}</td>
+			<td bgcolor="white">{{m.s14_rest}}</td>
+			<td bgcolor="white">{{m.s14_dif}}</td>
+			<td style="border-width: 0px; color: white" >S14</td>
+			</tr>
+			<tr >
+			<td style="border-width: 0px; color: white" class="text-center">Apex</td>
+			<td bgcolor="white">{{m.s17_stress}}</td>
+			<td bgcolor="white">{{m.s17_rest}}</td>
+			<td bgcolor="white">{{m.s17_dif}}</td>
+			<td style="border-width: 0px; color: white" >S17</td>
+			</tr>
+		</table>
+		
+		<!-- ---------------tabla 2------------------------------- -->
+			<table border=""  class="table col-md-4 " style="margin: 0 auto; border-width: 0px;" >
+		<tr><td  colspan="5"  class="text-center" style="border-width: 0px; color: white; left: 40px; position: relative;"> TERRITORIO CX</td></tr>
+			<tr>
+
+			<td style="border-width: 0px; "  width="30" ></td>
+			<td width="10" bgcolor="#FFFF00">A</td>
+			<td width="10" bgcolor="#FFFF00">R</td>
+			<td width="10" bgcolor="#FFFF00">D</td>
+			<td  width="10" style="border-width: 0px;"></td>
+			</tr>
+		
+		<tr  >
+			<td style="border-width: 0px; color: white" class="text-center" >Inferolateral Basal</td>
+			<td bgcolor="white">{{m.s5_stress}}</td>
+			<td bgcolor="white">{{m.s5_rest}}</td>
+			<td bgcolor="white">{{m.s5_dif}}</td>
+			<td style="border-width: 0px; color: white" >S5</td>
+			</tr>
+			<tr >
+			<td style="border-width: 0px; color: white" class="text-center">Anterolateral Basal</td>
+			<td bgcolor="white">{{m.s6_stress}}</td>
+			<td bgcolor="white">{{m.s6_rest}}</td>
+			<td bgcolor="white">{{m.s6_dif}}</td>
+			<td style="border-width: 0px; color: white" >S6</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px; color: white" class="text-center">Inferolateral Medio</td>
+			<td bgcolor="white">{{m.s11_stress}}</td>
+			<td bgcolor="white">{{m.s11_rest}}</td>
+			<td bgcolor="white">{{m.s11_dif}}</td>
+			<td style="border-width: 0px;color: white" >S11</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px;color: white" class="text-center">Anterolateral Medio</td>
+			<td bgcolor="white">{{m.s12_rest}}</td>
+			<td bgcolor="white">{{m.s12_stress}}</td>
+			<td bgcolor="white">{{m.s12_dif}}</td>
+			<td style="border-width: 0px;color: white" >S12</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px;color: white" class="text-center">Lateral Apical</td>
+			<td bgcolor="white">{{m.s16_stress}}</td>
+			<td bgcolor="white">{{m.s16_rest}}</td>
+			<td bgcolor="white">{{m.s16_dif}}</td>
+			<td style="border-width: 0px;color: white" >S16</td>
+			</tr>
+				<!-- <tr >
+			<td style="border-width: 0px;color: white" class="text-center"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td style="border-width: 0px;color: white" ></td>
+			</tr>
+			<tr >
+			<td style="border-width: 0px;color: white" class="text-center"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td style="border-width: 0px;color: white" ></td>
+			</tr> -->
+		</table>
+
+		<!-- ------------tabla 3------>
+		<table border=""  class="table col-md-4 " style="margin: 0 auto; border-width: 0px;" >
+		<tr><td  colspan="5"  class="text-center" style="border-width: 0px; color: white; left: 40px; position: relative;" > TERRITORIO CD</td></tr>
+			<tr>
+
+			<td style="border-width: 0px;  "  width="30" ></td>
+			<td width="10" bgcolor="#FFFF00">A</td>
+			<td width="10" bgcolor="#FFFF00">R</td>
+			<td width="10" bgcolor="#FFFF00">D</td>
+			<td  width="10" style="border-width: 0px;"></td>
+			</tr>
+		
+		<tr  >
+			<td style="border-width: 0px;color: white; " class="text-center" >Inferolateral Basal</td>
+			<td bgcolor="white">{{m.s3_stress}}</td>
+			<td bgcolor="white">{{m.s3_rest}}</td>
+			<td bgcolor="white">{{m.s3_dif}}</td>
+			<td style="border-width: 0px; color: white; " >S3</td>
+			</tr>
+			<tr >
+			<td style="border-width: 0px; color: white; " class="text-center">Anterolateral Basal</td>
+			<td bgcolor="white">{{m.s4_stress}}</td>
+			<td bgcolor="white">{{m.s4_rest}}</td>
+			<td bgcolor="white">{{m.s4_dif}}</td>
+			<td style="border-width: 0px;color: white; " >S4</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px;color: white; "class="text-center">Inferolateral Medio</td>
+			<td bgcolor="white">{{m.s9_stress}}</td>
+			<td bgcolor="white">{{m.s9_rest}}</td>
+			<td bgcolor="white">{{m.s9_dif}}</td>
+			<td style="border-width: 0px;color: white; " >S9</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px;color: white; " class="text-center">Anterolateral Medio</td>
+			<td bgcolor="white">{{m.s10_stress}}</td>
+			<td bgcolor="white">{{m.s10_rest}}</td>
+			<td bgcolor="white">{{m.s10_dif}}</td>
+			<td style="border-width: 0px;color: white; " >S10</td>
+			</tr>
+				<tr >
+			<td style="border-width: 0px;color: white; " class="text-center">Lateral Apical</td>
+			<td bgcolor="white">{{m.s15_stress}}</td>
+			<td bgcolor="white">{{m.s15_dif}}</td>
+			<td bgcolor="white">{{m.s15_rest}}</td>
+			<td style="border-width: 0px;color: white; " >S15</td>
+			</tr>
+			<!-- <tr >
+			<td style="border-width: 0px;" class="text-center"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td style="border-width: 0px;" ></td>
+			</tr>
+			<tr >
+			<td style="border-width: 0px;" class="text-center"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td style="border-width: 0px;" ></td>
+			</tr> -->
+		</table>
+
+		</div>
+
+		<div class="container">
+		<div class="row mt-4 mb-3" style="color: white; ">
+			<div class="form-group col-md-3 ">
+			<label for="control-label" class="" >SSS:</label>
+			<input type="text" class="form-control bordes2 ml-2" value="{{m.sss}} %">
+			</div>
+			<div class="form-group col-md-3">
+			<label for="" class="control-label">SSR:</label>
+			<input type="text" class="form-control bordes2 ml-2" value="{{m.ssr}} %">
+			</div>
+			<div class="form-group col-md-3">
+			<label for="" class="control-label">SD:</label>
+			<input class="form-control bordes2 ml-2" type="text" value="{{m.ssd}} %">
+			</div>
+			<div class="row col-md-3 mt-4">
+			<ul class="ml-5">
+				<li>A: APREMIO</li>
+				<li>R: REPOSO</li>
+				<li>D: DIFERENCIA</li>
+				<li>S: SEGMENTO</li>
+			</ul>
+			</div>
+			
+		</div>
+		</div>
+
+		<div class="container">
+			
+				<div class="form-group ml-md-2 mb-md-4 mt-md-2 mr-md-2">	
+						<div class="row col-md-12 ml-md-2 ml-md-4 d-flex">
+								<!-- <button type="button" class="btn btn-info btn-lg btn3d ml-auto"><span class="glyphicon glyphicon-question-sign"></span>Editar</button> -->
+								<td><a href="{% url 'editampi2' m.id_mpi %}" class="btn btn-info  ml-auto " style="width: 100px;height: 40px; border-color:#009688 ; background-color: #009688;">Editar</a></td>
+						</div>
+					</div>
+		</div>
+		{% endfor %}
+		{% else %}
+		<center><h1 style="color:white"> No existe datos de perfusión miocardica de este paciente </h1></center>
+		{% endif %}
+</fieldset>	
+</div>												
+<!------------------------------------Grafico Cámara Gamma--------------------------------------->
+<div class="padre">
+	<fieldset class="col-md-7 form-group form-inline mt-md-5 bordes1" style="font-size: medium; background-color: #263238; ">   	
+			<legend class="ml-md-1 col-md-3 bordes1" style="background-color: #009688; color: white;border-color: #009688; font-size: large;">Gráfico Cámara Gamma</legend>	
+	{% if mpi %}
+	{% for m in mpi %}	
+
+		<div class=" container mt-md-5 ml-md-5">
+			<div class="row">
+				<div class="col-md-1">
+						<h4 class=" ml-md-5 mt-md-3 mb-md-5" style="color: white;">Apremio</h4>
+				</div>
+					<div style="position: relative; left: 200px; ">
+							<img  style="position: absolute;" width="80" src="{% static 'aplicativo/img/central1.png' %}" />
+							<img id="img17" style="position: absolute;" width="80" src="{% static 'aplicativo/img/central2.png' %}" />
+							<img style="position: absolute;" width="80" src="{% static 'aplicativo/img/central3.png' %}" />
+							<input type="text" id="isss9" value="{{m.s9_stress}}" style="position: relative;  background: transparent;top: 8px; border: 0; left: 32px; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+						</div>
+						<div style="position: relative; left: 250px;">
+							<img  id="img13"style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP1.png' %}" />
+							<img id="img14" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP2.png' %}" />
+							<img id="img15" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP3.png' %}" />
+							<img id="img16" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP4.png' %}" />
+							<img id="" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP5.png' %}" />
+							<input type="text" id="isss5" value="{{m.s5_stress}}" style="position: relative; left :5px; background: transparent;top: -12px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="isss10" value="{{m.s10_stress}}" style="position: relative; left: -35px; background: transparent;top: 8px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="isss13" value="{{m.s13_stress}}"style="position:relative; left: -122px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="isss8" value="{{m.s8_stress}}" style="position: relative; left: -210px; background: transparent;top: 8px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+						</div>
+						<div style="position: relative; left: 100px; bottom: 10px;">
+							<img  id="img7"style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG1.png' %}" />
+							<img id="img8" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG2.png' %}" />
+							<img id="img9" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG3.png' %}" />
+							<img id="img10" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG4.png' %}" />
+							<img id="img11" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG5.png' %}" />
+							<img id="img12" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG6.png' %}" />
+							<img id="" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG7.png' %}" />
+							<input type="text" id="isss2"value="{{m.s2_stress}}" style="position: relative; left: 20px; background: transparent;top: -8px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="" >
+							<input type="text" id="isss4"value="{{m.s4_stress}}" style="position: relative; left: -70px; background: transparent;top: 4px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="isss12" value="{{m.s12_stress}}"style="position: relative; left: -133px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="isss16" value="{{m.s16_stress}}"style="position: relative; left: -170px; background: transparent;top: 47px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="isss6" value="{{m.s6_stress}}" style="position: relative; left: -208px; background: transparent;top: 4px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="isss14" value="{{m.s14_stress}}"style="position: relative; left: -272px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">	
+
+						</div>
+						<div style="position: relative; left: 610px; bottom: 120px;">
+							<img  id="img1"style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG1.png' %}" />
+							<img id="img2" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG2.png' %}" />
+							<img id="img3" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG3.png' %}" />
+							<img id="img4" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG4.png' %}" />
+							<img id="img5" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG5.png' %}" />
+							<img id="img6" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG6.png' %}" />
+							<img id="" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG7.png' %}" />
+							<input type="text" id="isss1"value="{{m.s1_stress}}" style="position: relative; left: -15px; background: transparent;top: 0px;border: 0; outline: none; text-align: center; " readonly="" >
+							<input type="text" id="isss3" value="{{m.s3_stress}}" style="position: relative; left: -175px; background: transparent;top: 20px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="isss7" value="{{m.s7_stress}}" style="position: relative; left: -160px; background: transparent;top: 20px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="isss11" value="{{m.s11_stress}}"style="position: relative; left: -305px; background: transparent;top: 65px;border: 0px; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="isss15" value="{{m.s15_stress}}"style="position: relative; left: -290px; background: transparent;top: 65px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">	
+							<input type="text" id="isss17" value="{{m.s17_stress}}"style="position: relative; left: -390px; background: transparent;top: 80px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">	
+						</div>
+		
+			</div>
+	
+			<div class="row mt-md-5 ">
+					<div class="col-md-1">
+							<h4 class=" ml-md-5 mt-md-3 mb-md-5" style="color: white;">Reposo</h4>
+					</div>
+					<div style="position: relative; left: 200px;">
+							<img style="position: absolute;" width="80" src="{% static 'aplicativo/img/central1.png' %}"  />
+							<img id="img34" style="position: absolute;" width="80" src="{% static 'aplicativo/img/central2.png' %}" />
+							<img  style="position: absolute;" width="80" src="{% static 'aplicativo/img/central3.png' %}" />
+							<input type="text" id="issr9" value="{{m.s9_rest}}" style="position: relative; left: 32px; background: transparent;top: 10px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+						</div>
+							<div style="position: relative; left: 250px;">
+							<img  id="img30"style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP1.png' %}" />
+							<img id="img31" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP2.png' %}" />
+							<img id="img32" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP3.png' %}" />
+							<img id="img33" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP4.png' %}" />
+							<img id="" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP5.png' %}" />
+							<input type="text" id="issr5" value="{{m.s5_rest}}" style="position: relative; left: 5px; background: transparent;top: -12px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">	
+							<input type="text" id="issr10" value="{{m.s10_rest}}" style="position: relative; left: -35px; background: transparent;top: 10px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issr13" value="{{m.s13_rest}}"style="position: relative; left: -122px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="issr8" value="{{m.s8_rest}}" style="position: relative; left: -210px; background: transparent;top: 8px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+						</div>
+							<div style="position: relative; left: 100px; bottom: 10px;">
+							<img  id="img24"style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG1.png' %}" />
+							<img id="img25" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG2.png' %}" />
+							<img id="img26" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG3.png' %}" />
+							<img id="img27" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG4.png' %}" />
+							<img id="img28" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG5.png' %}" />
+							<img id="img29" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG6.png' %}" />
+							<img id="" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG7.png' %}" />
+							<input type="text" id="issr2"value="{{m.s2_rest}}" style="position: relative; left: 20px; background: transparent;top: -8px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="" >
+							<input type="text" id="issr4"value="{{m.s4_rest}}" style="position: relative; left: -70px; background: transparent;top: 4px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issr12" value="{{m.s12_rest}}"style="position: relative; left: -133px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issr16" value="{{m.s16_rest}}"style="position: relative; left: -170px; background: transparent;top: 47px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="issr6" value="{{m.s6_rest}}" style="position: relative; left: -208px; background: transparent;top: 4px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issr14" value="{{m.s14_rest}}"style="position: relative; left: -272px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+						</div>
+						<div style="position: relative; left: 610px;bottom: 120px;">
+							<img  id="img18"style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG1.png' %}" />
+							<img id="img19" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG2.png' %}" />
+							<img id="img20" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG3.png' %}" />
+							<img id="img21" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG4.png' %}" />
+							<img id="img22" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG5.png' %}" />
+							<img id="img23" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG6.png' %}" />
+							<img id="" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG7.png' %}" />
+							<input type="text" id="issr1"value="{{m.s1_rest}}" style="position: relative; left: -15px; background: transparent;top: 0px;border: 0; outline: none; text-align: center; " readonly="" >
+							<input type="text" id="issr3" value="{{m.s3_rest}}" style="position: relative; left: -175px; background: transparent;top: 20px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="issr7" value="{{m.s7_rest}}" style="position: relative; left: -160px; background: transparent;top: 20px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issr11" value="{{m.s11_rest}}"style="position: relative; left: -305px; background: transparent;top: 65px;border: 0px; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issr15" value="{{m.s15_rest}}"style="position: relative; left: -290px; background: transparent;top: 65px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">	
+							<input type="text" id="issr17" value="{{m.s17_rest}}"style="position: relative; left: -390px; background: transparent;top: 80px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+						</div>
+			</div>
+
+			<div class="row mt-md-5 mb-md-4">
+					<div class="col-md-1">
+							<h4 class=" ml-md-5 mt-md-3 mb-md-5" style="color: white;">Diferencia</h4>
+					</div>
+					<div style="position: relative; left: 200px;">
+							<img style="position: absolute;" width="80" src="{% static 'aplicativo/img/central1.png' %}"  />
+							<img id="img51" style="position: absolute;" width="80" src="{% static 'aplicativo/img/central2.png' %}" />
+							<img  style="position: absolute;" width="80" src="{% static 'aplicativo/img/central3.png' %}" />
+							<input type="text" id="issd9" value="{{m.s9_dif}}" style="position: relative;  background: transparent;top: 8px; border: 0; left: 32px; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+						</div>
+							<div style="position: relative; left: 250px;">
+							<img  id="img47"style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP1.png' %}" />
+							<img id="img48" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP2.png' %}" />
+							<img id="img49" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP3.png' %}" />
+							<img id="img50" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP4.png' %}" />
+							<img id="" style="position: absolute;" width="70" src="{% static 'aplicativo/img/CP5.png' %}" />
+							<input type="text" id="issd5" value="{{m.s5_dif}}" style="position: relative; left: 5px; background: transparent;top: -12px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">	
+							<input type="text" id="issd10" value="{{m.s10_dif}}" style="position: relative; left: -35px; background: transparent;top: 10px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issd13" value="{{m.s13_dif}}"style="position: relative; left: -122px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="issd8" value="{{m.s8_dif}}" style="position: relative; left: -210px; background: transparent;top: 8px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+						</div>
+							<div style="position: relative; left: 100px; bottom: 10px;">
+							<img  id="img41"style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG1.png' %}" />
+							<img id="img42" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG2.png' %}" />
+							<img id="img43" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG3.png' %}" />
+							<img id="img44" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG4.png' %}" />
+							<img id="img45" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG5.png' %}" />
+							<img id="img46" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG6.png' %}" />
+							<img id="" style="position: absolute;" width="100" src="{% static 'aplicativo/img/CG7.png' %}" />
+							<input type="text" id="issd2"value="{{m.s2_dif}}" style="position: relative; left: 20px; background: transparent;top: -8px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="" >
+							<input type="text" id="issd4"value="{{m.s4_dif}}" style="position: relative; left: -70px; background: transparent;top: 4px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issd12" value="{{m.s12_dif}}"style="position: relative; left: -133px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issd16" value="{{m.s16_dif}}"style="position: relative; left: -170px; background: transparent;top: 47px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="issd6" value="{{m.s6_dif}}" style="position: relative; left: -208px; background: transparent;top: 4px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issd14" value="{{m.s14_dif}}"style="position: relative; left: -272px; background: transparent;top: 35px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+						</div>
+						<div style="position: relative; left: 610px;bottom: 120px;">
+							<img  id="img35"style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG1.png' %}" />
+							<img id="img36" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG2.png' %}" />
+							<img id="img37" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG3.png' %}" />
+							<img id="img38" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG4.png' %}" />
+							<img id="img39" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG5.png' %}" />
+							<img id="img40" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG6.png' %}" />
+							<img id="" style="position: absolute;" width="150" src="{% static 'aplicativo/img/CG7.png' %}" />
+							<input type="text" id="issd1"value="{{m.s1_dif}}" style="position: relative; left: -15px; background: transparent;top: 0px;border: 0; outline: none; text-align: center; " readonly="" >
+							<input type="text" id="issd3" value="{{m.s3_dif}}" style="position: relative; left: -175px; background: transparent;top: 20px;border: 0; outline: none; height: 45px; width: 60px;text-align: center;" readonly="">
+							<input type="text" id="issd7" value="{{m.s7_dif}}" style="position: relative; left: -160px; background: transparent;top: 20px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issd11" value="{{m.s11_dif}}"style="position: relative; left: -305px; background: transparent;top: 65px;border: 0px; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+							<input type="text" id="issd15" value="{{m.s15_dif}}"style="position: relative; left: -290px; background: transparent;top: 65px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">	
+							<input type="text" id="issd17" value="{{m.s17_dif}}"style="position: relative; left: -390px; background: transparent;top: 80px;border: 0; outline: none; height: 45px; width: 60px;text-align: center; " readonly="">
+						</div>
+			</div>
+
+	
+
+
+			{% endfor %}
+			{% else %}
+			<center><h1 style="color:white"> No existe datos de perfusión miocardica de este paciente </h1></center>
+			{% endif %}	
+					
+						
+					
+		</div>					
+</fieldset>
+</div>
+<!-------------------------INICIO DEL BOTON GENERAR PDF----------------------------->
+<div>
+	
+	<div class="row ml-md-2 mb-md-4 mt-md-2 mr-md-2">	
+	{% if estudio %}
+	{% for p in estudio %}
+		<div class="form-group col-md-11 ml-md-2 ml-md-4 padre">
+				<!-- <button type="button" class="btn btn-info btn-lg btn3d ml-auto"><span class="glyphicon glyphicon-question-sign"></span>Editar</button> -->
+				<td><a href="{% url 'preinforme' p.id_estudio %}" class="btn btn-info " style="width: 140px;height: 45px; border-color:#009688 ; background-color: #009688; font-size: large;">Generar PDF</a></td>
+		</div>
+		{% endfor %}
+		{% else %}
+	{% endif %}
+	</div>	
+</div>
+<!-------------------------FINAL DEL BOTON GENERAR PDF----------------------------->
+<!-----------------------------------Style--------------------------------------->
+<style>
+	.blanco{
+
+  -webkit-filter: grayscale(100%) brightness(120%) sepia(190%) hue-rotate(5deg) saturate(500%) contrast(0.7);
+      filter: grayscale(100%) brightness(120%) sepia(190%) hue-rotate(5deg) saturate(1000%) contrast(0.7); /*satruate  le dando mas intensidad de color*/
+}
+.amarillo{
+
+  -webkit-filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(500%) contrast(0.7);
+      filter: grayscale(100%) brightness(120%) sepia(90%) hue-rotate(5deg) saturate(15000%) contrast(0.7); /*satruate  le dando mas intensidad de color*/
+}
+
+.rosadoClaro{
+-webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+      filter: grayscale(100%) brightness(80%) sepia(100%) hue-rotate(-80deg) saturate(800%) contrast(1);/*0.8*/
+
+}
+
+.rosadoOscuro{
+-webkit-filter: invert(40%) grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(400%) contrast(2);
+      filter: grayscale(100%) brightness(20%) sepia(100%) hue-rotate(-100deg) saturate(1000%) contrast(0.8);
+
+}
+
+</style>
+<!----------------------------------Script-------------------------------->
+<script>
+
+	$(':input').attr('readonly','');
+/********************************************APREMIO-STRESS**********************************************/
+var valorApremio1=$('#isss1').val();
+AsignarColor(valorApremio1,1)
+var valorApremio2=$('#isss2').val();
+AsignarColor(valorApremio2,7)
+var valorApremio3=$('#isss3').val();
+AsignarColor(valorApremio3,2) 
+var valorApremio4=$('#isss4').val();
+AsignarColor(valorApremio4,8)
+var valorApremio5=$('#isss5').val();
+AsignarColor(valorApremio5,13)
+var valorApremio6=$('#isss6').val();
+AsignarColor(valorApremio6,12)
+var valorApremio7=$('#isss7').val();
+AsignarColor(valorApremio7,6)
+var valorApremio8=$('#isss8').val();
+AsignarColor(valorApremio8,14)
+var valorApremio9=$('#isss9').val();
+AsignarColor(valorApremio9,17)
+var valorApremio10=$('#isss10').val();
+AsignarColor(valorApremio10,16)
+var valorApremio11=$('#isss11').val();
+AsignarColor(valorApremio11,3)
+var valorApremio12=$('#isss12').val();
+AsignarColor(valorApremio12,9)
+var valorApremio13=$('#isss13').val();
+AsignarColor(valorApremio13,15)
+var valorApremio14=$('#isss14').val();
+AsignarColor(valorApremio14,11)
+var valorApremio15=$('#isss15').val();
+AsignarColor(valorApremio15,5)
+var valorApremio16=$('#isss16').val();
+AsignarColor(valorApremio16,10)
+var valorApremio17=$('#isss17').val();
+AsignarColor(valorApremio17,4)
+
+/********************************************REST-REPOSO**********************************************/
+
+var valorReposo1=$('#issr1').val();
+AsignarColor(valorReposo1,18)
+var valorReposo2=$('#issr2').val();
+AsignarColor(valorReposo2,24)
+var valorReposo3=$('#issr3').val();
+AsignarColor(valorReposo3,19) 
+var valorReposo4=$('#issr4').val();
+AsignarColor(valorReposo4,25)
+var valorReposo5=$('#issr5').val();
+AsignarColor(valorReposo5,30)
+var valorReposo6=$('#issr6').val();
+AsignarColor(valorReposo6,29)
+var valorReposo7=$('#issr7').val();
+AsignarColor(valorReposo7,23)
+var valorReposo8=$('#issr8').val();
+AsignarColor(valorReposo8,31)
+var valorReposo9=$('#issr9').val();
+AsignarColor(valorReposo9,34)
+var valorReposo10=$('#issr10').val();
+AsignarColor(valorReposo10,33)
+var valorReposo11=$('#issr11').val();
+AsignarColor(valorReposo11,20)
+var valorReposo12=$('#issr12').val();
+AsignarColor(valorReposo12,26)
+var valorReposo13=$('#issr13').val();
+AsignarColor(valorReposo13,32)
+var valorReposo14=$('#issr14').val();
+AsignarColor(valorReposo14,28)
+var valorReposo15=$('#issr15').val();
+AsignarColor(valorReposo15,22)
+var valorReposo16=$('#issr16').val();
+AsignarColor(valorReposo16,27)
+var valorReposo17=$('#issr17').val();
+AsignarColor(valorReposo17,21)
+
+/********************************************DIFFERENCE-DIFERENCIA**********************************************/
+
+var valorDiferencia1=$('#issd1').val();
+AsignarColor(valorDiferencia1,35)
+var valorDiferencia2=$('#issd2').val();
+AsignarColor(valorDiferencia2,41)
+var valorDiferencia3=$('#issd3').val();
+AsignarColor(valorDiferencia3,36) 
+var valorDiferencia4=$('#issd4').val();
+AsignarColor(valorDiferencia4,42)
+var valorDiferencia5=$('#issd5').val();
+AsignarColor(valorDiferencia5,47)
+var valorDiferencia6=$('#issd6').val();
+AsignarColor(valorDiferencia6,46)
+var valorDiferencia7=$('#issd7').val();
+AsignarColor(valorDiferencia7,40)
+var valorDiferencia8=$('#issd8').val();
+AsignarColor(valorDiferencia8,48)
+var valorDiferencia9=$('#issd9').val();
+AsignarColor(valorDiferencia9,51)
+var valorDiferencia10=$('#issd10').val();
+AsignarColor(valorDiferencia10,50)
+var valorDiferencia11=$('#issd11').val();
+AsignarColor(valorDiferencia11,37)
+var valorDiferencia12=$('#issd12').val();
+AsignarColor(valorDiferencia12,43)
+var valorDiferencia13=$('#issd13').val();
+AsignarColor(valorDiferencia13,49)
+var valorDiferencia14=$('#issd14').val();
+AsignarColor(valorDiferencia14,45)
+var valorDiferencia15=$('#issd15').val();
+AsignarColor(valorDiferencia15,39)
+var valorDiferencia16=$('#issd16').val();
+AsignarColor(valorDiferencia16,44)
+var valorDiferencia17=$('#issd17').val();
+AsignarColor(valorDiferencia17,38)
+
+
+
+
+
+/***************************************************************************************************************/
+function AsignarColor(Valor,id) {
+
+
+if (Valor==1) {$('#img'+id).addClass("blanco");}
+if (Valor==2) {$('#img'+id).addClass("amarillo");}
+  if (Valor==3) {$('#img'+id).addClass("rosadoClaro ");}
+  if (Valor==4) {$('#img'+id).addClass("rosadoOscuro ");}
+
+}
+
+</script>
+
+</form>
+</body>
+{% endblock %} 
+</html>

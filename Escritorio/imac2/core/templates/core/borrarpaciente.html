@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+<style>
+  .padre{
+	display: flex;
+   justify-content: center;
+   align-items: center;
+
+}
+
+.bordes1{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+
+}
+</style>
+<form method="post" >
+    {% csrf_token %}
+   <div class="container mt-md-5 padre">
+    <div class="row mt-md-5 ">
+    <div class="mt-md-5">
+        <div class="mt-md-5">
+            <div class="card mt-md-5 col-md-12 bordes1" style="background-color: #263238; padding: 10px; top: 160px;">
+                <h3 class="mt-md-5 mb-md-5" style="color:white;">¿Desea eliminar al paciente {{object.nombre}} {{object.apellido}}?</h3>
+                <div class="row padre">
+                <button class="btn btn-danger col-md-4 mb-md-5 " type="submit">Si, eliminar</button>
+                <a class="btn btn-success col-md-4 ml-md-3 mb-md-5" href="{% url 'pacienteslistado' %}"> Cancelar</a>
+                </div> 
+                </div>
+        </div>
+    </div>
+    </div>
+   </div>
+</form>
+{% endblock content %}

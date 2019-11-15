@@ -1,0 +1,665 @@
+
+{% extends "core/base.html" %}
+
+{%block title%} <title>Antecedentes Patologicos</title>{%endblock%}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'antec/css/estilosAntecedentes.css' %}">
+<script src="{% static 'antec/js/funcionesAntecedentes.js' %}"></script> 
+<style>
+  .padre{
+	display: flex;
+  	justify-content: center;
+
+}
+
+.boton
+{
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 0 25px;
+    border-radius: 15px 0 0 15px;
+}
+
+.boton2
+{
+    position: relative;
+    border-radius: 0 15px 15px 0;
+    width: 50px;
+    height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background :#263238;
+    color: white;
+}
+
+.bordes1{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+
+}
+
+.bordes{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 1px solid #000000;
+
+}
+
+</style>
+
+<body>
+
+<!-- *****************************************************FORMULARIO DE BUSQUEDA************************************************* -->
+<div class="container mt-md-3 mb-md-3 col-md-12">
+		<div class="row d-flex">
+				<form class="form-inline mt-md-2"  method="GET">
+						{% csrf_token %}
+						<div class="row  " >
+							<input type="text" class=" boton ml-md-4 mt-md-5" placeholder="Buscar Paciente" name="q"  >
+							<button type="submit" class="boton2 mt-md-5"><i class="fa fa-search"></i></button>
+						</div>
+					</form>
+			
+			
+					<form method="POST" class="ml-auto mt-md-5 ">
+							<div class="form-group col-md-12 d-flex mb-md-3 mt-md-3">
+									<a type="button" href="{% url 'listaantecedentes' %}" class="btn ml-auto mr-md-2 " style=" width: 230px;height: 45px; background-color:#0086c3; color:white; font-family: 'Raleway', sans-serif;
+									font-size: large; border-radius: 10px 10px 10px 10px; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius: 10px 10px 10px 10px;"  >Lista de Antecedentes</a>
+									
+									</div>
+					</form>
+		</div>
+	</div>
+
+<!-- *********************************************************FORMULARIO ANTECEDENTE PACIENTE**************************************************** -->
+
+		    
+		
+		
+  			<table class="table table-dark" id="table" data-toggle="table" data-height="200">
+		    <thead style="background-color: #009688;">
+		      <tr>
+		       <th>Paciente</th>
+		          <th>Nombre</th>
+		          <th>Apellido</th>
+		          <th>DNI</th>
+		          <th>Cobertura medica</th>
+		          <th>Numero de afiliado</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		      {% if eventos %}
+		    {% for k in eventos %}
+		  <tr>
+		      <th><input type="radio" value="{{k.pacientes.id_pac}}" name="d" id="{{k.pacientes.fecha_nacimiento}}" idEstudio="{{k.id_estudio}}" nombre="{{k.pacientes.nombre}} {{k.pacientes.apellido}}" ></th>
+		          <td>{{k.pacientes.nombre}}</td>
+		          <td>{{k.pacientes.apellido}}</td>
+		          <td>{{k.pacientes.dni}}</td>
+		          <td>{{k.pacientes.cobertura_medica}}</td>
+		          <td>{{k.pacientes.numero_afilido}}</td>		    
+		    </tr>
+		    {% endfor %}
+		    {% else %}
+		    {% endif %}
+		    </tbody>
+		  </table>
+															
+																										
+<!-- ************************************************************************************COMIENZO DE FIELDSETS***************************************************** -->
+<form method="POST" >
+	{% csrf_token %}
+		<input type="text" name="paciente_antecedente" id="id_pac_antec" style="display:none;">
+		
+
+<div class="form-inline">	            
+
+<input type="text" name="estudio" id="id_pac_estudio" style="display:none;">
+<div class="container col-md-12">
+<div class="row padre mt-4">
+		
+<!-------------------FIELDSET FCRV----------------------->
+<fieldset class="form-group form-inline col-md-6 bordes1 mb-4" style="background-color: #263238; color: white; font-size: medium;">    	
+<legend class="bordes col-md-3" style="background-color: #009688; color: white;font-size: large;">FCRV</legend>							
+
+<div class="row form-group ml-3 mt-3">
+		<div class="col-md-2 ml-5 form-group ">
+							<input class="form-check-input " type="checkbox" id="" name="fcrv_hta">
+							<label class="form-check-label ml-2"> HTA</label>
+		 </div>
+
+		<div class="col-md-3 form-group">			    
+		<input class="form-control bordes" type="date" id="fecha_fcrv_hta" name="fecha_fcrv_hta"  onchange="calcularAños(this.id);">
+		</div>
+
+			  <div class="col-md-2 ml-4 form-group">
+				
+				  <input class="form-check-input ml-2" type="checkbox" id="" name="fcrv_dta">
+				  <label class="form-check-label ml-2" for="autoSizingCheck"> DBT</label>
+				
+			</div>
+  
+			  <div class="col-md-3 form-group ">
+				  <input class="form-control bordes" type="date" id="fecha_fcrv_dta" name="fecha_fcrv_dta" onchange="calcularAños(this.id);">		      						
+				</div>
+
+</div> 
+
+<div class="row form-group mt-4 ml-3">
+
+<div class="col-md-6 form-group ">
+	  
+		<input class="form-check-input ml-5 " type="checkbox" id="" name="anteced_fliar">
+		<label class="form-check-label ml-2" for=""> ANTECEDENTES FLIARES</label>
+	  
+  </div>
+
+
+
+<div class="col-md-6 form-group ">
+	  
+		<input class="form-check-input ml-2" type="checkbox" id="ex_tabaquismo" name="ex_tabaquismo" onchange="unicaOpcion(this.id);">
+		<label class="form-check-label ml-2" for=""> EX-TABAQUISMO</label>
+	  
+  </div>
+
+
+
+</div> 
+
+<div class="row form-group mt-4 ml-3">
+
+<div class="col-md-6 form-group ">
+	  
+		<input class="form-check-input ml-5" type="checkbox" id="" name="dislipemia">
+		<label class="form-check-label ml-2" for="">DISLIPEMIA</label>
+	  
+  </div>
+
+
+
+<div class="col-md-6 form-group">
+	  
+		<input class="form-check-input ml-2 " type="checkbox" id="" name="sedentarismo">
+		<label class="form-check-label ml-2" for=""> SEDENTARISMO</label>
+	  
+  </div>
+
+
+
+</div> 
+
+<div class="row form-group mt-4 ml-5">
+
+<div class="col-md-4 form-group">
+	  
+		<input class="form-check-input ml-3" type="checkbox" id="" name="estres">
+		<label class="form-check-label ml-2" for="">ESTRÉS</label>
+	  
+  </div>
+
+
+
+<div class="col-md-4 form-group ">
+	  
+		<input class="form-check-input " type="checkbox" id="chagas">
+		<label class="form-check-label ml-2" for=""> CHAGAS</label>
+	
+  </div>
+
+
+  <div class="col-md-4 form-group ">
+	 
+		<input class="form-check-input " type="checkbox" id="" name="resincron">
+		<label class="form-check-label ml-2" for="">RESINCRONIZACIÓN</label>
+	  
+  </div>
+
+
+
+
+
+</div> 
+
+<div class="row form-group mt-4 mb-4 ml-5">
+
+<div class="col-md-4 form-group">
+		<input class="form-check-input ml-3" type="checkbox" id="tabaquismo" name="tabaquismo" onchange="unicaOpcion(this.id);">
+		<label class="form-check-label ml-2" for="">TABAQUISMOS</label>
+  </div>
+
+<div class="col-md-4 form-group">
+	  <div class="form-check">
+		<input class="form-check-input " type="checkbox" id="" name="marcapasos">
+		<label class="form-check-label ml-2" for=""> MARCAPASOS</label>
+	  </div>
+  </div>
+
+  <div class="col-md-4 form-group">
+		<input class="form-check-input " type="checkbox" id="" name="cdi">
+		<label class="form-check-label ml-2" for="">CDI</label>
+  </div>		  
+</div> 
+
+
+
+</fieldset>	
+<!-------------------FIELDSET CRM----------------------->					     
+<fieldset class="card form-group col-md-4 ml-3 bordes1 mb-4 " style="background-color: #263238; color: white; font-size: medium;">    	
+		<legend class="bordes col-md-3" style="background-color: #009688; color: white;font-size: large;">CRM</legend>
+						
+		<div class="container mt-2">
+		<div class="row form-group ml-5">
+				<div class="col-md-4 form-group">
+								  <div class="form-check ">
+									<input class="form-check-input" type="checkbox" id="autoSizingCheck">
+									<label class="form-check-label ml-2" for="autoSizingCheck"> CRM</label>
+								  </div>
+							  </div>
+		
+					<div class="col-md-4 form-group  ">
+					<input class="form-control bordes" type="date" id="fecha_crm_hta" name="fecha_crm_hta" onchange="calcularAños(this.id);">			      
+							  </div>
+		
+		</div> 
+		
+		<div class="row form-group ml-5 mt-4">
+		
+		<div class="col-md-4 form-group ">
+				  <div class="form-check ">
+					<input class="form-check-input " type="checkbox" id="" name="pm">
+					<label class="form-check-label ml-2" for="">PM</label>
+				  </div>
+			  </div>
+		
+		
+		
+		<div class="col-md-4 form-inline ">
+				  <div class="form-check">
+					<input class="form-check-input " type="checkbox" id="" name="pr">
+					<label class="form-check-label ml-2" for=""> PR</label>
+				  </div>
+			  </div>
+		
+		
+			  <div class="col-md-4 form-inline ">
+				  <div class="form-check">
+					<input class="form-check-input " type="checkbox" id="" name="pv">
+					<label class="form-check-label ml-2" for="">PV</label>
+				  </div>
+			  </div>
+		
+		
+		
+		</div> 
+		
+		<div class="row form-group ml-5 mt-4">
+		
+		<div class="col-md-4 form-group ">
+				  <div class="form-check">
+					<input class="form-check-input " type="checkbox" id="" name="pm_da">
+					<label class="form-check-label ml-2" for="">DA</label>
+				  </div>
+			  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+				  <div class="form-check">
+					<input class="form-check-input " type="checkbox" id="" name="pr_dg">
+					<label class="form-check-label ml-2" for=""> DG</label>
+				  </div>
+			  </div>
+		
+		
+			  <div class="col-md-4 form-group ">
+				  <div class="form-check">
+					<input class="form-check-input " type="checkbox" id="" name="pv_da">
+					<label class="form-check-label ml-2" for="">DA</label>
+				  </div>
+			  </div>
+		
+		
+		
+		</div> 
+		
+		<div class="row form-group ml-5 mt-4">
+		
+		<div class="col-md-4 form-group ">
+				  <div class="form-check ">
+					<input class="form-check-input " type="checkbox" id="" name="pm_dg">
+					<label class="form-check-label ml-2" for="">DG</label>
+				  </div>
+			  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+				  <div class="form-check ">
+					<input class="form-check-input" type="checkbox" id="" name="pr_cx">
+					<label class="form-check-label ml-2" for="">Cx</label>
+				  </div>
+			  </div>
+		
+		
+			  <div class="col-md-4 form-group ">
+				  <div class="form-check ">
+					<input class="form-check-input" type="checkbox" id="" name="pv_dg">
+					<label class="form-check-label " for="">DG</label>
+				  </div>
+			  </div>
+		
+		
+		
+		</div> 
+		
+		
+		<div class="row form-group ml-5 mt-4 mb-2">
+		
+		<div class="col-md-4 form-group ">
+				  <div class="form-check">
+					<input class="form-check-input " type="checkbox" id="" name="pm_cx">
+					<label class="form-check-label" for="">Cx</label>
+				  </div>
+			  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+				  <div class="form-check">
+					<input class="form-check-input sr-only " type="checkbox" id="autoSizingCheck">
+					<label class="form-check-label" for="autoSizingCheck"></label>
+				  </div>
+			  </div>
+		
+		
+			  <div class="col-md-4 form-group  ">
+				  <div class="form-check">
+					<input class="form-check-input " type="checkbox" id="" name="pv_cx">
+					<label class="form-check-label" for="">Cx</label>
+				  </div>
+			  </div>
+		  
+		</div> 
+		</div>
+				
+</fieldset>	
+</div>			
+			
+
+</div>
+
+<div class="container col-md-12 mb-md-4">
+<div class="row padre">
+	
+<fieldset class="form-group  col-md-5  bordes1" style="background-color: #263238; color: white; font-size: medium;">    	
+<legend class="bordes col-md-3" style="background-color: #009688; color: white;font-size: large;">ANTECEDENTES</legend>
+					
+<div class="container ml-md-5">
+	
+<div class="row form-group mt-2 ml-3">
+
+		<div class="col-md-3 form-group ">
+					  <div class="form-check ">
+						<input class="form-check-input " type="checkbox" id="" name="infarto">
+						<label class="form-check-label ml-2" for="">INFARTO</label>
+					  </div>
+				  </div>
+					
+		<div class="col-md-4 form-group">
+			<input class=" form-control bordes" type="date" id="fecha_infarto_reciente" name="fecha_infarto_reciente" onchange="calcularAños(this.id);">		      
+				  </div>
+		  
+		</div> 
+		
+		<div class="row form-group mt-3 ml-3">
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc1">
+						<label class="form-check-label ml-2" for="">ATC</label>
+					  </div>
+				  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc2">
+						<label class="form-check-label ml-2" for=""> ATC</label>
+					  </div>
+				  </div>
+		
+		
+				  <div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc3">
+						<label class="form-check-label ml-2" for="">ATC</label>
+					  </div>
+				  </div>
+		
+		
+		  
+		</div> 
+		
+		<div class="row form-group mt-3 ml-3 ">
+		
+		<div class="col-md-4 form-group">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc1_da">
+						<label class="form-check-label ml-2" for="">DA</label>
+					  </div>
+				  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc2_da">
+						<label class="form-check-label ml-2" for=""> DA</label>
+					  </div>
+				  </div>
+		
+		
+				  <div class="col-md-4 form-group">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc3_da">
+						<label class="form-check-label ml-2" for="">DA</label>
+					  </div>
+				  </div>
+		
+		
+		  
+		</div> 
+		
+		<div class="row form-group mt-3 ml-3 ">
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc1_dg">
+						<label class="form-check-label ml-2" for="">DG</label>
+					  </div>
+				  </div>
+		
+		
+		
+		<div class="col-md-4 form-group">
+					  <div class="form-check mr-sm-4">
+						<input class="form-check-input " type="checkbox" id="" name="atc2_dg">
+						<label class="form-check-label ml-2" for="">DG</label>
+					  </div>
+				  </div>
+		
+		
+				  <div class="col-md-4 form-group ">
+					  <div class="form-check ">
+						<input class="form-check-input " type="checkbox" id="" name="atc3_dg">
+						<label class="form-check-label ml-2" for="">DG</label>
+					  </div>
+				  </div>
+		
+		
+		  
+		</div> 
+		
+		
+		<div class="row form-group mt-3 ml-3">
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check ">
+						<input class="form-check-input " type="checkbox" id="" name="atc1_cx">
+						<label class="form-check-label ml-2" for="">Cx</label>
+					  </div>
+				  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check mr-sm-4">
+						<input class="form-check-input " type="checkbox" id="" name="atc2_cx">
+						<label class="form-check-label ml-2" for="">Cx</label>
+					  </div>
+				  </div>
+		
+		
+				  <div class="col-md-4 form-group">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc3_cx">
+						<label class="form-check-label ml-2" for="">Cx</label>
+					  </div>
+				  </div>
+		
+		
+		  
+		</div> 
+		
+		<div class="row form-group mt-3 ml-3">
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc1_cd">
+						<label class="form-check-label ml-2" for="">CD</label>
+					  </div>
+				  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc2_cd">
+						<label class="form-check-label ml-2" for="">CD</label>
+					  </div>
+				  </div>
+		
+		
+				  <div class="col-md-4 form-group">
+					  <div class="form-check mr-sm-4">
+						<input class="form-check-input " type="checkbox" id="" name="atc3_cd">
+						<label class="form-check-label ml-2" for="">CD</label>
+					  </div>
+				  </div>
+		
+		
+		  
+		</div> 
+		
+		<div class="row form-group mt-3 ml-3">
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc1_stent_bms">
+						<label class="form-check-label ml-2" for="">Stent BMS</label>
+					  </div>
+				  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc2_stent_bms">
+						<label class="form-check-label ml-2" for="">Stent BMS</label>
+					  </div>
+				  </div>
+		
+		
+				  <div class="col-md-4 form-group  ">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="" name="atc3_stent_bms">
+						<label class="form-check-label ml-2" for="">Stent BMS</label>
+					  </div>
+				  </div>
+		
+		
+		  
+		</div> 
+		
+		<div class="form-group form-inline mt-3 ml-3 mb-3">
+		
+		<div class="col-md-4 form-group">
+					  <div class="form-check">
+						<input class="form-check-input " type="checkbox" id="autoSizingCheck" name="atc1_stent_des">
+						<label class="form-check-label ml-2" for="autoSizingCheck">Stent DES</label>
+					  </div>
+				  </div>
+		
+		
+		
+		<div class="col-md-4 form-group ">
+					  <div class="form-check ">
+						<input class="form-check-input ml-1" type="checkbox" id="autoSizingCheck" name="atc2_stent_des">
+						<label class="form-check-label ml-2" for="autoSizingCheck">Stent DES</label>
+					  </div>
+				  </div>
+		
+		
+				  <div class="col-md-4 form-group">
+					  <div class="form-check ">
+						<input class="form-check-input ml-2 " type="checkbox" id="autoSizingCheck" name="atc3_stent_des">
+						<label class="form-check-label ml-2" for="autoSizingCheck">Stent DES</label>
+					  </div>
+				  </div>
+		
+		
+		  
+		</div> 
+</div>
+		
+</fieldset>	
+
+<fieldset class="form-group col-md-5 ml-4 bordes1" style="background-color: #263238; color: white; font-size: medium;">    	
+						<legend class="bordes col-md-3" style="background-color: #009688; color: white;font-size: large;" >OTROS</legend>		       
+						 
+								<div class="row ">
+										<div class="form-group shadow-textarea ml-2 mr-2 mt-2">
+												<textarea class="form-control ml-3" id="exampleFormControlTextarea6" rows="10" cols="80"  placeholder="Escribe aquí..." name="otros_antecedentes"></textarea>
+											  </div>
+								</div>	
+								<div class="row d-flex">
+										<div class="form-group ml-auto mr-4 mt-md-4">
+												<button type="button" onclick="ValidarEnvioFormulario();" class="btn ml-auto" style="width: 120px;height: 45px;	 background-color:#009688; color:white; font-family: 'Raleway', sans-serif;
+												font-size: large; border-radius: 10px 10px 10px 10px; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius: 10px 10px 10px 10px;">Guardar</button>
+												</div>	
+								</div>	<button id="enviarFormulario" style="display:none;"></button>
+								
+						 								
+</fieldset>	
+
+</div>
+</div>
+					
+</div>
+</form>
+
+</body>
+</html>
+{% endblock %}

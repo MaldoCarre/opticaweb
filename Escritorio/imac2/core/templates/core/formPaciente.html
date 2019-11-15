@@ -1,0 +1,291 @@
+
+{% extends "core/base.html" %} <!-- extiendo de base.htm  -->
+
+{%block title%}  <title>Estudios</title>  {%endblock%}
+
+ {% block content %}
+ {% load static %} <!-- Override files  -->
+ <!-- ******************************************************************INCLUYENDO ARCHIVOS ESTATICOS*********************************************************** -->
+<link rel="stylesheet" href="{% static 'core/css/estilosEstudio.css' %}">
+<script src="{% static 'core/js/funcionesEstudio.js' %}"></script>
+
+<style>
+  .padre{
+	display: flex;
+  	justify-content: center;
+
+}
+
+.bordes1{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+
+}
+.bordes{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 1px solid #000000;
+
+}
+
+
+
+label{
+    color: white;
+}
+
+.boton
+{
+    width: 200px;
+    height: 40px;
+    border: none;
+    outline: none;
+    padding: 0 25px;
+    border-radius: 15px 0 0 15px;
+}
+
+.boton2
+{
+    position: relative;
+    border-radius: 0 15px 15px 0;
+    width: 50px;
+    height: 40px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background :#263238;
+    color: white;
+}
+
+
+</style>
+  
+    <body>
+                                                                                        <hr>
+
+
+
+
+        <!-- ******************************************************************FORMULARIO BUSQUEDA************************************************************* -->
+        <div class="container mt-md-3 mb-md-3 col-md-12">
+            <div class="row d-flex">
+                    <form class="form-inline mt-md-2"  method="GET">
+                            {% csrf_token %}
+                            <div class="row  " >
+                                <input type="text" class=" boton ml-md-4 mt-md-5" placeholder="Buscar Paciente" name="q"  >
+                                <button type="submit" class="boton2 mt-md-5"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>  
+                        <form method="POST" class="ml-auto mt-md-5 ">
+							<div class="form-group col-md-12 d-flex mb-md-3 mt-md-3">
+									<a type="button" href="{% url 'estudioslistado' %}" class="btn ml-auto mr-md-2 " style=" width: 230px;height: 45px; background-color:#0086c3; color:white; font-family: 'Raleway', sans-serif;
+									font-size: large; border-radius: 10px 10px 10px 10px; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius: 10px 10px 10px 10px;"  >Lista de datos medicos</a>
+									
+									</div>
+					</form>
+            </div>
+        </div>
+
+
+    <!-- ***************************************************************FORMULARIO ESTUDIO***************************************************************************** -->
+<form method="POST" >
+        {% csrf_token %}
+    <!------------------------------Paciente Oculto---------------------------------->
+    <input type="text" name="pacientes" id="id_pac_estudio" style="display: none;">
+    <!------------------------------Tabla Pacientes---------------------------------->    
+    <table class="table table-dark " id="table" data-toggle="table" data-height="200">
+        <thead style="background-color: #009688;">
+        <tr >
+        <th>Paciente</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>DNI</th>
+            <th>Cobertura medica</th>
+            <th>Numero de afiliado</th>
+            <th style="display: none;">Fecha de Nacimiento</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if eventos %}
+        {% for k in eventos %}
+    <tr  >
+        <th><input type="radio" value="{{k.id_pac}}" name="d" id="{{k.fecha_nacimiento}}"  nombre="{{k.nombre}} {{k.apellido}}" ></th>
+            <td>{{k.nombre}}</td>
+            <td>{{k.apellido}}</td>
+            <td>{{k.dni}}</td>
+            <td>{{k.cobertura_medica}}</td>
+            <td>{{k.numero_afilido}}</td>
+            <td style="display: none;">{{k.fecha_nacimiento}}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        {% endif %}
+        </tbody>
+    </table>
+
+    <div class="container padre mb-md-5 col-md-12">   
+            <div class="card col-md-8 bordes1 padre mt-md-5" style="  background-color:#263238; ">
+
+                        <div class="row mt-md-5 ml-3 mr-3">
+
+                            <div class="form-group col-md-6">
+                            <label for="sel1">Institucion:</label>
+                            <select class="form-control bordes" id="1" name="instituciones"  required="">
+                                <option value="">Seleccione</option>  
+                                <option value="1">ERI</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                    <label for="email">Edad:</label>
+                                    <input type="text" class="form-control bordes"  placeholder="" name="edad" id="edad" required="" readonly title="La edad se calcula automáticamente." >
+                            </div>
+                            <div class="form-group col-md-3">
+                                        <div class="form-group">
+                                            <label for="form_name">Peso (Kg): </label>
+                                            <input  type="text"  name="peso" class="form-control bordes" placeholder="" required="required" onKeyUp="calcular()"  id="num1">
+                                        </div>
+                            </div>
+                            
+
+                        </div>   
+                
+                        <div class="row mt-3 ml-3 mr-3">
+                            <div class="form-group col-md-3">
+                                        <div class="form-group">
+                                            <label for="form_email">IMC:</label>
+                                            <input  type="text" name="imc" class="form-control bordes" placeholder="" required="required"  id="resultado" readonly title="El índice de masa corporal se calcula automáticamente." >                     
+                                        </div>
+                            </div>  
+
+                                    <div class="form-group col-md-3">
+                                        <label for="form_name">Talla (Cm):</label>
+                                        <input type="text" name="talla" class="form-control bordes" required="required" onKeyUp="calcular()"  id="num2">
+                                    
+                                    </div>
+                               
+                                
+                                    <div class="form-group col-md-3">
+                                        <label for="form_email">Superficie Corporal (m<sup>2</sup>):</label>
+                                        <input type="text" name="supCorporal" class="form-control bordes" placeholder="" required="required" id="resultado2"  readonly title="La superficie corporal se calcula automáticamente.">
+                                        
+                                    </div>
+                                
+
+                                
+                                        <div class="form-group col-md-3">
+                                            <label for="form_name">Perim. Abdominal:</label>
+                                            <input id="form_name" type="text" name="perimetroAbdominal" id="2" class="form-control bordes" placeholder="" required="required" >
+                            
+                                        </div>
+                                   
+
+                                    
+                                       
+                            
+                        </div>
+                
+                        <div class="row mt-md-3 mr-3 ml-3">
+                               
+
+                                    <div class="form-group col-md-3">
+                                        <label for="form_email">Decubito:</label>
+                                        <select class="form-control bordes" id="3" name="decubito"  required="">
+                                            <option value="">Seleccione</option>  
+                                            <option value="Supino">Supino</option>
+                                            <option value="Prono">Prono</option> 
+                                          </select>
+                                    
+                                    </div>
+                               
+                                    
+                                
+                                    <div class="form-group col-md-3">
+                                        <label for="form_name">Médico:</label>
+                                        <select class="form-control  bordes " id="4" name="medico"  required="">
+                                            <option value="">Seleccione</option>  
+                                            <option value="Supino">Dr. Cabrera</option>
+                                            <option value="Prono">Dr. Zárate</option> 
+                                            <option value="Prono">Dr. Gallardo</option>
+                                            <option value="Prono">Dr. Palacios</option>  
+                                          </select>
+                                        
+                                    </div>
+                               
+                                    <div class="form-group col-md-3">
+                                        <label for="form_email">Indicación:</label>
+                                        <select class="form-control bordes  mr-sm-2" id="5" name="indicacion"  required="">
+                                            <option value="">Seleccione</option>  
+                                            <option value="Diagnóstico de enfermedad coronaria">Diagnóstico de enfermedad coronaria</option>
+                                            <option value="Evaluación de la extensión y gravedad de enfermedad coronaria">Evaluación de la extensión y gravedad de enfermedad coronaria </option>
+                                            <option value="Evaluación de viabilidad miocárdica">Evaluación de viabilidad miocárdica</option>
+                                            <option value="Estratificación de riesgo post IAM, prequirúrgica, general">Estratificación de riesgo post IAM, prequirúrgica, general</option>
+                                            <option value="Valoración de dolor precordial agudo">Valoración de dolor precordial agudo</option>
+                                          </select>
+                                    
+                                    </div>
+                                    <div class="form-group col-md-3" >
+                                            <label for="form_email" class="ml-5" >Urgencia:</label>
+                                            <div>
+                                                <input id="form_email " type="checkbox" name="urgencia" class="ml-5" placeholder=""   style="position: relative; width: 20px; height: 20px;">
+                                            </div>
+                                            
+                                        </div> 
+                                
+                        </div>
+                        
+                        <div class="row mt-md-3 mr-3 ml-3">
+                                
+                            
+                                <div class="form-group col-md-9">
+                                    <label for="form_message">Observaciones:</label>
+                                    <textarea id="form_message" name="observaciones" class="form-control bordes " placeholder="" rows="4"  ></textarea>
+                                    
+                                </div>
+                                <div class="form-group col-md-3">
+                
+                
+                
+                                        <!-- <input id="form_email" type="text" name="calidadTecnica" class="form-control" placeholder="" required="required" data-error="Valid email is required."> -->
+                                        
+                                        <label for="" style="float: center;" class="ml-5">Calidad Tecnica:</label>
+                                    <div style="background-color: red;" class="ml-5">
+                                        <p class="clasificacion form-inline" style="margin: 0px; float: left; "  >
+                                                <input id="radio1" type="radio" name="calidadTecnica" value="5"    style="display: none;"><!--
+                                            --><label for="radio1" class="label">★</label><!--
+                                            --><input id="radio2" type="radio" name="calidadTecnica" value="4"style="display: none;" ><!--
+                                            --><label for="radio2" class="label">★</label><!--
+                                            --><input id="radio3" type="radio" name="calidadTecnica" value="3" style="display: none;"><!--
+                                            --><label for="radio3" class="label">★</label><!--
+                                            --><input id="radio4" type="radio" name="calidadTecnica" value="2"style="display: none;" ><!--
+                                            --><label for="radio4" class="label">★</label><!--
+                                            --><input id="radio5" type="radio" name="calidadTecnica" value="1" style="display: none;"><!--
+                                            --><label for="radio5" class="label">★</label>
+                                        </p>
+                                    </div>
+                                    </div>
+                            
+                            
+                        </div>
+
+                        <div class="form-group d-flex mb-5 mt-3">
+                                <button type="button" onclick="ValidarEnvioFormulario();" class="btn ml-auto mr-4" style="background-color:#009688; color:white; font-family: 'Raleway', sans-serif;
+                                font-size: large; border-radius: 10px 10px 10px 10px; -moz-border-radius: 10px 10px 10px 10px; -webkit-border-radius: 10px 10px 10px 10px;">Guardar</button>
+                        </div>
+                    
+                        <button  id="enviarFormulario" style="display:none;" ></button>
+
+            </div>
+
+            
+    </div>
+        
+</form>
+
+    </body>
+
+ {% endblock %} 

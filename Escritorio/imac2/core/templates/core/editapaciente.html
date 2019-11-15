@@ -1,0 +1,108 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<style>
+  .padre{
+	display: flex;
+  	justify-content: center;
+
+}
+     
+            label{
+                color: white;
+            }
+
+            .bordes1{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 0px solid #000000;
+
+}
+
+.bordes{
+
+border-radius: 10px 10px 10px 10px;
+-moz-border-radius: 10px 10px 10px 10px;
+-webkit-border-radius: 10px 10px 10px 10px;
+border: 1px solid #000000;
+
+}
+
+</style>
+ 
+
+<body>
+<div class="container padre">
+    <div class="card col-md-10 mt-md-5 bordes1" style="background-color: #263238; top: 160px;">
+      <form class="ml-2 mr-2" method="POST">
+        {% csrf_token %}
+        <div class="row mt-5">
+          <!-------------Nombre------------------->
+          <div class="col-md-6">
+            <label for="email">Nombre:</label>
+            {{form.nombre}}
+          </div>
+          <!-------------Apellido------------------->
+          <div class="col-md-6" >
+            <label for="pwd">Apellido:</label>
+              {{form.apellido}}
+          </div>
+
+        </div>
+       
+       <div class="row mt-4">
+          <div class="form-group col-md-4">
+              <label for="email">Dni:</label>
+              {{form.dni}}
+            </div>
+            <div class="form-group col-md-4">
+                <label for="pwd">Fecha de Nacimiento:</label>
+                {{form.fecha_nacimiento}}
+              </div>
+            <div class="form-group col-md-4">
+              <label for="pwd">Nacionalidad:</label>
+              {{form.nacionalidad}}
+            </div>
+
+       </div>
+
+       <div class="row mt-2">
+          <div class="form-group col-md-4" >
+              <label for="sel1">Sexo:</label>
+              {{form.sexo}}
+        </div> 
+        <div class="form-group col-md-4" >
+            <label for="comment">Domicilio:</label>
+            {{form.domicilio}}
+      </div> 
+      <div class="form-group col-md-4">
+        <label for="pwd">N° de Domicilio:</label>
+        {{form.numero_domicilio}}
+      </div>
+       </div>
+
+       <div class="row mt-2">
+          <div class="form-group col-md-6">
+              <label for="email">Cobertura Médica:</label>
+              {{form.cobertura_medica}}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="pwd">N° de Afiliado:</label>
+              {{form.numero_afilido}}
+            </div>
+
+       </div>
+
+       
+       <div class="form-group mt-2 d-flex ">
+       <button type="submit" class="btn ml-auto col-md-2 mb-3 bordes1" style="background-color: #009688; color: white;">Guardar</button>
+       </div>
+       
+      </form>
+    </div> 
+</div>
+
+</body> 
+{% endblock content %}
