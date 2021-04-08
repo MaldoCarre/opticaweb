@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aca cargamos los lentes</title>
+</head>
+<body>
+    <h1>Aca cargamos los lentes y los listamos tambien </h1>
+
+    <h3>lista de lentes</h3>
+    {% for l in lentes %}
+        {{l.modelo}}
+        {{l.cantidad}}
+        {{l.precio}}
+    {% endfor %}
+        
+    <h3>Aca cargamos los lentes (tiene que estar al lado)</h3>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">CargarFormulario</button>
+    </form>
+</body>
+</html>
