@@ -9,10 +9,18 @@
 </head>
 <body>
  <form action="" method="POST"> {% csrf_token %}
-    <label for="">modelo lenet</label>
+  <label for="">codigo</label>
+    {{form.barcode}}
+  <label for="">Marca</label>
+    {{form.marca}}
+  <label for="">modelo</label>
     {{form.modelo}}
+    <label for="">descripcion</label>
+    {{form.descripcion}}
     <label for="">cantidadlente</label>
     {{form.cantidad}}
+     <label for="">precio</label>
+    {{form.precio}}
     <button type="submit">Editar</button>
 </form>
 </body>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aca cargamos los lentes</title>
+</head>
+<body>
+
+    <h3>Aca cargamos las recetas (un solo formulario en el medio de la pantalla)</h3>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">CargarFormulario</button>
+    </form>
+</body>
+</html>
