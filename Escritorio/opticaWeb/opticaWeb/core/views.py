@@ -44,6 +44,7 @@ def ListaReceta(request):
     return render(request,'core/listaReceta.html',{'receta':receta})
 
 def cargaReceta(request):
+    lentes = Lente.objects.all()
     form = RecetaForm()
     if request.method=='POST':
         form = RecetaForm(request.POST)
@@ -53,13 +54,27 @@ def cargaReceta(request):
         else:
             form = LenteForm
             return render (request ,"el formulario no se cargo correctamente")
-    return render(request,'core/cargaReceta.html',{'form':form})
+    return render(request,'core/cargaReceta.html',{'form':form,'lentes':lentes})
 
 class EditaReceta (UpdateView):
     model = Receta
     form = RecetaForm
     fields = '__all__'
     template_name='core/editareceta.html'
+    def get_context_data(self, **kwargs):
+        context = super(EditaReceta, self).get_context_data(**kwargs)
+        id = self.object.id
+        receta = Receta.objects.filter(id = id)
+        n_armazon = 0
+        for a in receta:
+            n_armazon = a.armazon
+        context = {
+            'lentes': Lente.objects.all(),
+            'valor': n_armazon,
+            'receta': receta,
+        }
+        #context['lentes'] =  #whatever you would like
+        return context
     def get_success_url(self):
         return reverse('cargaReceta')
 
