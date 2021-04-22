@@ -1,27 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-   
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edita Lentes</title>
-</head>
-<body>
- <form action="" method="POST"> {% csrf_token %}
-  <label for="">codigo</label>
-    {{form.barcode}}
-  <label for="">Marca</label>
-    {{form.marca}}
-  <label for="">modelo</label>
-    {{form.modelo}}
-    <label for="">descripcion</label>
-    {{form.descripcion}}
-    <label for="">cantidadlente</label>
-    {{form.cantidad}}
-     <label for="">precio</label>
-    {{form.precio}}
-    <button type="submit">Editar</button>
-</form>
-</body>
-</html>
+{% extends "core/base.html" %}
+
+{% block content %}
+
+ <div class="row justify-content-center">
+                                <div class="col-md-6 col-xl-5 mt-5">
+                                    <div class="card">
+                                        <div class="card-body border bg-white">
+                                            <form action="" method="POST">
+                                            {% csrf_token %}
+                                                <div class="form-group ">
+                                                  <label for="">Barcode</label>
+                                                  <input type="text" class="form-control" id="" name="barcode" value="{{object.barcode}}">
+  
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Marca</label>
+                                                     <input type="text" class="form-control" id="" name="marca" value="{{object.marca}}">
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label for="">Modelo</label>
+                                                    <input type="text" class="form-control" id="" name="modelo" value="{{object.modelo}}">
+                                                  </div>
+                                                <div class="form-group">
+                                                  <label for="">Descripción</label>
+                                                  <input type="text" class="form-control" id="" name="descripcion" value="{{object.descripcion}}">
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="">Cantidad </label>
+                                                        <input type="text" class="form-control" id="" name="cantidad" value="{{object.cantidad}}">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="">Precio</label>
+                                                        <input type="text" class="form-control" id="" name="precio" value="{{object.precio}}">
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group mt-4">
+                                                    <button type="submit" class="btn btn-primary btn-block">Actualizar datos datos</button>
+                                                  </div>
+                                              </form>
+                                        </div>
+                                      </div>
+                                                
+                                </div>
+                                </div>
+                            </div>
+
+ {% endblock %}

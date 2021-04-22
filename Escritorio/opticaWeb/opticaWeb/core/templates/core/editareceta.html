@@ -1,17 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
-   
-<head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+{% extends "core/base.html" %}
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edita Receta</title>
-</head>
-<body>
- {% comment %} <form action="" method="POST"> {% csrf_token %}
+{% block content %}
+
+<div class="row mt-5">
+    <div class="col-md-12 p-3 my-5">
+        <div class="card my-5">
+            <div class="card-body bg-light">
+                 <form action="" method="POST">
+                {% csrf_token %}
+                <h4>Datos Personales</h4>
+                <hr class="my-4">
+                 <div class="row">
+                    <div class="form-group col">
+                        <label for="">Nombre</label>
+                        <input type="text" class="form-control " id="" name="nombre" placeholder="" value = "{{object.nombre}}">
+                    </div>
+                     <div class="form-group col">
+                        <label for="">Apellido</label>
+                        <input type="text" class="form-control" id="" name="apellido" placeholder="" value = "{{object.apellido}}"> 
+                    </div>
+                 </div>
+                   <div class="row">
+                    <div class="form-group col">
+                        <label for="">DNI</label>
+                        <input type="text" class="form-control" id="" name="dni" placeholder="" value = "{{object.dni}}">
+                    </div>
+                     <div class="form-group col">
+                        <label for="">Localidad</label>
+                        <input type="text" class="form-control" id="" name="localidad" placeholder="" value = "{{object.localidad}}">
+                    </div>
+                     <div class="form-group col">
+                        <label for="">Telefono</label>
+                        <input type="text" class="form-control" id="" name="telefono" placeholder="" value = "{{object.telefono}}">
+                    </div>
+                   </div>
+                   <h4 class="mt-4">Datos de Receta</h4>
+                   <hr class="my-4">
+                   <div class="row">
+                    <div class="form-group col-4">
+                        <label for="">Número de Receta</label>
+                        <input type="text" class="form-control " id="" name="numero_receta" placeholder="" value = "{{object.numero_receta}}">
+                    </div>
+                     <!-- <div class="form-group col-4">
+                        <label for="">Fecha</label>
+                        <input type="date" class="form-control" id="" name="fecha" placeholder="">
+                    </div> -->
+                 </div>
+                    <h4 class="mt-4">Datos de Ojo Derecho</h4>
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="">ESF</label>
+                            <input type="text" class="form-control" id="" name="d_esf" placeholder="" value = "{{object.d_esf}}">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">CIL</label>
+                            <input type="text" class="form-control" id="" name="d_cil" placeholder="" value = "{{object.d_cil}}">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">EJE</label>
+                            <input type="text" class="form-control" id="" name="d_eje" placeholder="" value = "{{object.d_eje}}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="">ALT</label>
+                            <input type="text" class="form-control" id="" name="d_alt" placeholder="" value = "{{object.d_alt}}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="">INT</label>
+                            <input type="text" class="form-control" id="" name="d_d_int" placeholder="" value = "{{object.d_int}}">
+                        </div>
+                       </div>
+                       <h4 class="mt-4">Datos de Ojo Izquierdo</h4>
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="">ESF</label>
+                            <input type="text" class="form-control" id="" name="i_esf" placeholder="" value = "{{object.i_esf}}">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">CIL</label>
+                            <input type="text" class="form-control" id="" name="i_cil" placeholder="" value = "{{object.i_cil}}">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">EJE</label>
+                            <input type="text" class="form-control" id="" name="i_eje" placeholder="" value = "{{object.i_eje}}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="">ALT</label>
+                            <input type="text" class="form-control" id="" name="i_alt" placeholder="" value = "{{object.i_alt}}">
+                        </div>
+                        <div class="form-group col">
+                            <label for="">INT</label>
+                            <input type="text" class="form-control" id="" name="i_d_int" placeholder="" value = "{{object.i_int}}">
+                        </div>
+                       </div>
+                       <!-- <h4>Datos Personales</h4>
+                       <hr class="my-4">
+                       <div class="row">
+                        <div class="form-group col">
+                            <label for="">Calibrado</label>
+                            <input type="text" class="form-control" id="" name="calibrado" placeholder="">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">Armazon</label>
+                            <input type="text" class="form-control" id="" name="armazon" placeholder="">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">Tam_pel</label>
+                            <input type="text" class="form-control" id="" name="tam_pel" placeholder="">
+                        </div>
+                        <div class="form-group col">
+                         <label for="">alt_OD</label>
+                         <input type="text" class="form-control" id="" name="alt_OD" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">Distancia</label>
+                         <input type="text" class="form-control" id="" name="distancia" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">Material del cristal</label>
+                         <input type="text" class="form-control" id="" name="material_de_cristal" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">color_cristal</label>
+                         <input type="text" class="form-control" id="" name="color_cristal" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">observacion</label>
+                         <input type="text" class="form-control" id="" name="observacion" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">TOTAL $</label>
+                         <input type="text" class="form-control" id="" name="total" placeholder="">
+                     </div> -->
+                        <!-- <div class="row">
+                        
+                        </div> -->
+                          
+                          </div>
+                          
+                    <button class="btn btn-primary btn-block" type="submit">Cargar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    
+{% endblock %}
+
+
+
+
+<!-- {% comment %} <select name="armazon" id="">seleccionar el marco
+        {% for l in lentes %}
+        <option value={{l.id}}>{{l.marca}}{{l.modelo}}</option>
+        
+        {% endfor %}
+        </select> {% endcomment %} -->
+
+
+ <!-- <form action="" method="POST"> {% csrf_token %}
  EL VALOR del armazon es  {{valor}}
     {% for r in receta %}
         {% for l in lentes %}
@@ -27,11 +179,5 @@
         <option value={{l.id}}>{{l.marca}}{{l.modelo}}</option>
         {% endfor %}
         </select>
-  la fecha es : {{object.fecha}} {% endcomment %}
-    <button type="submit">Editar</button>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-
-</form>
-</body>
-</html>
+  la fecha es : {{object.fecha}} 
+    <button type="submit">Editar</button> -->

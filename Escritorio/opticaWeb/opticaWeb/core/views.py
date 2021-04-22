@@ -61,20 +61,20 @@ class EditaReceta (UpdateView):
     form = RecetaForm
     fields = '__all__'
     template_name='core/editareceta.html'
-    def get_context_data(self, **kwargs):
-        context = super(EditaReceta, self).get_context_data(**kwargs)
-        id = self.object.id
-        receta = Receta.objects.filter(id = id)
-        n_armazon = 0
-        for a in receta:
-            n_armazon = a.armazon
-        context = {
-            'lentes': Lente.objects.all(),
-            'valor': n_armazon,
-            'receta': receta,
-        }
+    #def get_context_data(self, **kwargs):
+     #   context = super(EditaReceta, self).get_context_data(**kwargs)
+      #  id = self.object.id
+       # receta = Receta.objects.filter(id = id)
+        #n_armazon = 0
+        #for a in receta:
+        #    n_armazon = a.armazon
+        #context = {
+        #    'lentes': Lente.objects.all(),
+        #    'valor': n_armazon,
+        #    'receta': receta,
+        #}
         #context['lentes'] =  #whatever you would like
-        return context
+        #return context
     def get_success_url(self):
         return reverse('cargaReceta')
 
@@ -83,4 +83,5 @@ class BorraReceta(DeleteView):
     template_name='core/borraReceta.html'
     def get_success_url(self):
         return reverse('cargaReceta')
+
 

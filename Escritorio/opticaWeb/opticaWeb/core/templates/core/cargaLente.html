@@ -1,27 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aca cargamos los lentes</title>
-</head>
-<body>
-    <h1>Aca cargamos los lentes y los listamos tambien </h1>
+    
+{% extends "core/base.html" %}
 
-    <h3>lista de lentes</h3>
-    {% for l in lentes %}
-        {{l.modelo}}
-        {{l.cantidad}}
-        {{l.precio}}
-    {% endfor %}
-        
-    <h3>Aca cargamos los lentes (tiene que estar al lado)</h3>
+{% block content %}
 
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">CargarFormulario</button>
-    </form>
-</body>
-</html>
+<div class="row ">
+
+                                <div class="col-md-4 p-3 my-5">
+                                    <div class="card my-5">
+                                        <div class="card-body bg-light">
+                                            <form action="" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group ">
+                                                  <label for="">Barcode</label>
+                                                  <input type="text" class="form-control" id="" name="barcode" placeholder="">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Marca</label>
+                                                    <input type="text" class="form-control" id="" name="marca" placeholder="">
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label for="">Modelo</label>
+                                                    <input type="text" class="form-control" id="" name="modelo" placeholder="">
+                                                  </div>
+                                                <div class="form-group">
+                                                  <label for="">Descripción</label>
+                                                  <textarea class="form-control" id="" name="descripcion" rows="3"></textarea>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <label for="">Cantidad </label>
+                                                        <input type="text" class="form-control" id="" name="cantidad" placeholder="">
+                                                    </div>
+                                                    <div class="col">
+                                                        <label for="">Precio</label>
+                                                        <input type="text" class="form-control" id="" name="precio" placeholder="">
+                                                    </div>
+                                                  </div>
+                                                  <div class="form-group mt-4">
+                                                    <button type="submit" class="btn btn-primary btn-block">Cargar datos</button>
+                                                  </div>
+                                              </form>
+                                        </div>
+                                      </div>
+                                </div>
+
+                                <div class="col-md-8 p-3 my-5">
+                                
+                                    <table id="tabla" class="table table-bordered bg-transparent my-5" style="width:100%">
+                                        <thead>
+                                            <tr class="bg-primary text-light">
+                                                <th>Barcode</th>
+                                                <th>Marca</th>
+                                                <th>Modelo</th>
+                                                <th>Descripción</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for l in lentes %}
+                                            <tr>
+                                                <td>{{l.barcode}}</td>
+                                                <td>{{l.marca}}</td>
+                                                <td>{{l.modelo}}</td>
+                                                <td>{{l.descripcion}}</td>
+                                                <td>{{l.cantidad}}</td>
+                                                <td>{{l.precio}}</td>
+                                                <td><div class="row">
+                                                    <div class="col-md-4">
+                                                        <a class="btn btn-success" href="{% url 'edita' l.id %}" role="button"><i class="fas fa-pen-alt"></i></a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a class="btn btn-danger ml-2" href="{% url 'borra' l.id %}" role="button"><i class="fas fa-trash-alt"></i></a>
+                                                    </div>
+                                                  </div></td>
+                                                  {% endfor %}
+                                            </tr>
+    
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Barcode</th>
+                                                <th>Marca</th>
+                                                <th>Modelo</th>
+                                                <th>Descripción</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    
+                                </div>
+
+                            </div>
+                            {% endblock %} 

@@ -1,20 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venta del lente</title>
-</head>
+{% extends "core/base.html" %}
+
 <body>
-    <form action="" method="POSt"> {% csrf_token %}
-        {% for l in lente %}
-        <h1>Desea vender el producto {{l.modelo}} ? </h1>
-        <input type="text" name="lente" id="" value="{{l.id}}" >
-        {% endfor %}
+{% block content %}
+<br>
+<br>
 
-        <button type="submit">Realizar venta</button>
+<div class="container mt-5"></div>
 
-    </form>
+ <table id="tabla" class="table table-bordered bg-transparent my-5" style="width:100%">
+                                        <thead>
+                                            <tr class="bg-primary text-light">
+                                                <th>Codigo</th>
+                                                <th>Marca</th>
+                                                <th>Modelo<th>
+                                                <th>Precio</th>
+                                                <th>Vender</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for l in lentes %}
+                                            <tr>
+                                                <td>{{l.barcode}}</td>
+                                                <td>{{l.marca}}</td>
+                                                <td>{{l.modelo}}</td>
+                                                <td>{{l.precio}}</td>
+                                                <td><div class="row">
+                                                    <div class="col-md-4">
+                                                        <a class="btn btn-success" href="{% url 'edita' l.id %}" role="button">Vender</a>
+                                                    </div>
+                                                    </td>
+                                                  {% endfor %}
+                                            </tr>
+    
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Marca</th>
+                                                <th>Modelo<th>
+                                                <th>Precio</th>
+                                                <th>Vender</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+{% endblock %}
 </body>
 </html>

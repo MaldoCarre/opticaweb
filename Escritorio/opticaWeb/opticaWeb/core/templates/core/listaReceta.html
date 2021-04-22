@@ -1,19 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% extends "core/base.html" %}
+
 <body>
-    <h1>Aca listamos los lentes muy posiblemente por aca abajo.</h1>
-    {% for r in receta %}
-    {{r.nombre}}
-    {{r.apellido}}
-    {{r.observacion}}
-    {{r.fecha}}
+{% block content %}
+<br>
+<br>
+
+<div class="container mt-5"></div>
+
+ <table id="tabla" class="table table-bordered bg-transparent my-5" style="width:100%">
+                                        <thead>
+                                            <tr class="bg-primary text-light">
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Telefono</th>
+                                                <th>localidad</th>
+                                                <th>fecha</th>
+                                                <th>dni</th>
+                                                <th>Vender</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for l in receta %}
+                                            <tr>
+                                                <td>{{l.nombre}}</td>
+                                                <td>{{l.apellido}}</td>
+                                                <td>{{l.telefono}}</td>
+                                                <td>{{l.localidad}}</td>
+                                                <td>{{l.fecha}}</td>
+                                                <td>{{l.dni}}</td>
+                                                <td><div class="row">
+                                                    <div class="col-md-4">
+                                                        <a class="btn btn-success" href="{% url 'edita' l.id %}" role="button"><i class="fas fa-pen-alt"></i></a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a class="btn btn-danger ml-2" href="{% url 'borra' l.id %}" role="button"><i class="fas fa-trash-alt"></i></a>
+                                                    </div>
+                                                  </div></td>
+                                                  {% endfor %}
+                                            </tr>
     
-    {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Nombre</th>
+                                                <th>Apellido</th>
+                                                <th>Telefono</th>
+                                                <th>localidad</th>
+                                                <th>fecha</th>
+                                                <th>dni</th>
+                                                <th>Vender</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+{% endblock %}
 </body>
 </html>

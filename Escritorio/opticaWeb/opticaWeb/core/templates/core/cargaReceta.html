@@ -1,25 +1,172 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aca cargamos los lentes</title>
-</head>
-<body>
+{% extends "core/base.html" %}
 
-    <h3>Aca cargamos las recetas (un solo formulario en el medio de la pantalla)</h3>
+{% block content %}
+
+<div class="row mt-5">
+    {% comment %} <h3>Aca cargamos las recetas (un solo formulario en el medio de la pantalla)</h3>
 
     <form action="" method="POST">
         {% csrf_token %}
-        <select name="armazon" id="">seleccionar el marco
+        {{form.as_p}}
+        <button type="submit">CargarFormulario</button>
+    </form> {% endcomment %}
+
+
+    <div class="col-md-12 p-3 my-5">
+        <div class="card my-5">
+            <div class="card-body bg-light">
+                 <form action="" method="POST">
+                {% csrf_token %}
+                <h4>Datos Personales</h4>
+                <hr class="my-4">
+                 <div class="row">
+                    <div class="form-group col">
+                        <label for="">Nombre</label>
+                        <input type="text" class="form-control " id="" name="nombre" placeholder="">
+                    </div>
+                     <div class="form-group col">
+                        <label for="">Apellido</label>
+                        <input type="text" class="form-control" id="" name="apellido" placeholder="">
+                    </div>
+                 </div>
+                   <div class="row">
+                    <div class="form-group col">
+                        <label for="">DNI</label>
+                        <input type="text" class="form-control" id="" name="dni" placeholder="">
+                    </div>
+                     <div class="form-group col">
+                        <label for="">Localidad</label>
+                        <input type="text" class="form-control" id="" name="localidad" placeholder="">
+                    </div>
+                     <div class="form-group col">
+                        <label for="">Telefono</label>
+                        <input type="text" class="form-control" id="" name="telefono" placeholder="">
+                    </div>
+                   </div>
+                   <h4 class="mt-4">Datos de Receta</h4>
+                   <hr class="my-4">
+                   <div class="row">
+                    <div class="form-group col-4">
+                        <label for="">Número de Receta</label>
+                        <input type="text" class="form-control " id="" name="numero_receta" placeholder="">
+                    </div>
+                     <!-- <div class="form-group col-4">
+                        <label for="">Fecha</label>
+                        <input type="date" class="form-control" id="" name="fecha" placeholder="">
+                    </div> -->
+                 </div>
+                    <h4 class="mt-4">Datos de Ojo Derecho</h4>
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="">ESF</label>
+                            <input type="text" class="form-control" id="" name="d_esf" placeholder="">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">CIL</label>
+                            <input type="text" class="form-control" id="" name="d_cil" placeholder="">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">EJE</label>
+                            <input type="text" class="form-control" id="" name="d_eje" placeholder="">
+                        </div>
+                        <div class="form-group col">
+                            <label for="">ALT</label>
+                            <input type="text" class="form-control" id="" name="d_alt" placeholder="">
+                        </div>
+                        <div class="form-group col">
+                            <label for="">INT</label>
+                            <input type="text" class="form-control" id="" name="d_d_int" placeholder="">
+                        </div>
+                       </div>
+                       <h4 class="mt-4">Datos de Ojo Izquierdo</h4>
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="">ESF</label>
+                            <input type="text" class="form-control" id="" name="i_esf" placeholder="">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">CIL</label>
+                            <input type="text" class="form-control" id="" name="i_cil" placeholder="">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">EJE</label>
+                            <input type="text" class="form-control" id="" name="i_eje" placeholder="">
+                        </div>
+                        <div class="form-group col">
+                            <label for="">ALT</label>
+                            <input type="text" class="form-control" id="" name="i_alt" placeholder="">
+                        </div>
+                        <div class="form-group col">
+                            <label for="">INT</label>
+                            <input type="text" class="form-control" id="" name="i_d_int" placeholder="">
+                        </div>
+                       </div>
+                       <!-- <h4>Datos Personales</h4>
+                       <hr class="my-4">
+                       <div class="row">
+                        <div class="form-group col">
+                            <label for="">Calibrado</label>
+                            <input type="text" class="form-control" id="" name="calibrado" placeholder="">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">Armazon</label>
+                            <input type="text" class="form-control" id="" name="armazon" placeholder="">
+                        </div>
+                         <div class="form-group col">
+                            <label for="">Tam_pel</label>
+                            <input type="text" class="form-control" id="" name="tam_pel" placeholder="">
+                        </div>
+                        <div class="form-group col">
+                         <label for="">alt_OD</label>
+                         <input type="text" class="form-control" id="" name="alt_OD" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">Distancia</label>
+                         <input type="text" class="form-control" id="" name="distancia" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">Material del cristal</label>
+                         <input type="text" class="form-control" id="" name="material_de_cristal" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">color_cristal</label>
+                         <input type="text" class="form-control" id="" name="color_cristal" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">observacion</label>
+                         <input type="text" class="form-control" id="" name="observacion" placeholder="">
+                     </div>
+                     <div class="form-group col">
+                         <label for="">TOTAL $</label>
+                         <input type="text" class="form-control" id="" name="total" placeholder="">
+                     </div> -->
+                        <!-- <div class="row">
+                        
+                        </div> -->
+                          
+                          </div>
+                          
+                    <button class="btn btn-primary btn-block" type="submit">Cargar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    
+{% endblock %}
+
+
+
+
+{% comment %} <select name="armazon" id="">seleccionar el marco
         {% for l in lentes %}
         <option value={{l.id}}>{{l.marca}}{{l.modelo}}</option>
         
         {% endfor %}
-        </select>
-        
-        <button type="submit">CargarFormulario</button>
-    </form>
-</body>
-</html>
+        </select> {% endcomment %}
