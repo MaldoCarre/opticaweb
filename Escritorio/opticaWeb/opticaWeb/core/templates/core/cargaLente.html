@@ -1,5 +1,6 @@
     
 {% extends "core/base.html" %}
+{% block tittle %}Stoc, carga de lentes y marcos{% endblock tittle %}
 
 {% block content %}
 
@@ -46,16 +47,16 @@
 
                                 <div class="col-md-8 p-3 my-5">
                                 
-                                    <table id="tabla" class="table table-bordered bg-transparent my-5" style="width:100%">
+                                    <table id="tabla" class="table table-bordered bg-transparent my-5 text-center" style="width:100%">
                                         <thead>
                                             <tr class="bg-primary text-light">
                                                 <th>Barcode</th>
                                                 <th>Marca</th>
                                                 <th>Modelo</th>
                                                 <th>Descripción</th>
-                                                <th>Cantidad</th>
+                                                <th >Cantidad</th>
                                                 <th>Precio</th>
-                                                <th>Acciones</th>
+                                                <th style="width:80%%;">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -65,16 +66,12 @@
                                                 <td>{{l.marca}}</td>
                                                 <td>{{l.modelo}}</td>
                                                 <td>{{l.descripcion}}</td>
-                                                <td>{{l.cantidad}}</td>
+                                                <td >{{l.cantidad}}</td>
                                                 <td>{{l.precio}}</td>
-                                                <td><div class="row">
-                                                    <div class="col-md-4">
-                                                        <a class="btn btn-success" href="{% url 'edita' l.id %}" role="button"><i class="fas fa-pen-alt"></i></a>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <a class="btn btn-danger ml-2" href="{% url 'borra' l.id %}" role="button"><i class="fas fa-trash-alt"></i></a>
-                                                    </div>
-                                                  </div></td>
+                                                <td>
+                                                        <a class="btn btn-success mb-1 btn-sm" href="{% url 'edita' l.id %}" role="button">Editar/Ver</a>
+                                                        <a class="btn btn-danger  btn-sm" href="{% url 'borra' l.id %}" role="button">Borrar</i></a>
+                                                    </td>
                                                   {% endfor %}
                                             </tr>
     

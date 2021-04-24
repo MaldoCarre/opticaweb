@@ -6,7 +6,7 @@ from.forms import Venta_Lente_Form
 
 def lista_lentes_venta(request):
     lentes = Lente.objects.all()
-    return render (request,'ventas/venta_lente.html',{'lentes':lentes})
+    return render (request,'ventas/lista_lente_ventas.html',{'lentes':lentes})
 
 
 def venta_Lente (request,pk):
@@ -26,9 +26,9 @@ def venta_Lente (request,pk):
     return render (request,'ventas/venta_lente.html',{'form':form,'lente':lente})
 
 
-def ventas_lentes(request):
+def ventas_lentes_vendidos(request):
     total_lentes = 0
     ventas_L = Venta_Lente.objects.all()
     for v in ventas_L:
-        total_lentes += v.lente.precio
+        total_lentes = v.lente.precio+v.lente.precio
     return render (request,'ventas/muestraventas.html',{'total_lentes':total_lentes,'ventas_L':ventas_L})

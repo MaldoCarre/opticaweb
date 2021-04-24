@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% extends "core/base.html" %}
-
+{% block tittle %}Lista receta{% endblock tittle %}Lista receta
 <body>
 {% block content %}
 <br>
@@ -31,10 +31,10 @@
                                                 <td>{{l.dni}}</td>
                                                 <td><div class="row">
                                                     <div class="col-md-4">
-                                                        <a class="btn btn-success" href="{% url 'edita' l.id %}" role="button"><i class="fas fa-pen-alt"></i></a>
+                                                        <a class="btn btn-success" href="{% url 'editaReceta' l.id %}" role="button">Editar/Ver</a>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <a class="btn btn-danger ml-2" href="{% url 'borra' l.id %}" role="button"><i class="fas fa-trash-alt"></i></a>
+                                                        <a class="btn btn-danger ml-2" href="{% url 'borraReceta' l.id %}" role="button">Borrar</i></a>
                                                     </div>
                                                   </div></td>
                                                   {% endfor %}

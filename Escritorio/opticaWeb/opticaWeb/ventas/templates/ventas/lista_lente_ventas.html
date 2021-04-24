@@ -1,17 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venta Lentes</title>
-</head>
+{% extends "core/base.html" %}
+{% block tttle %}Vender articulo{% endblock tttle %}
 <body>
-    <h1>Aca se realizara la venta de los lentes (primero los listos en una tabla con buscador con un boton al lado que diga vender)</h1>
-    <form action="" method="POST">{% csrf_token %}
-    {% for l in lentes %}
-    {{l.marca}} {{l.modelo}} {{l.cantidad}} {{l.precio}} <a href="{% url 'ventalente' l.id %}" role="button"> Vender</a>
-    {% endfor %}
-    </form> 
+{% block content %}
+<br>
+<br>
+
+<div class="container mt-5"></div>
+
+ <table id="tabla" class="table table-bordered bg-transparent my-5" style="width:100%">
+                                        <thead>
+                                            <tr class="bg-primary text-light">
+                                                <th>Codigo</th>
+                                                <th>Marca</th>
+                                                <th>Modelo</th>
+                                                <th>Precio</th>
+                                                <th>Vender</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for l in lentes %}
+                                        {% if l.cantidad > 0 %}
+                                            <tr>
+                                                <td>{{l.barcode}}</td>
+                                                <td>{{l.marca}}</td>
+                                                <td>{{l.modelo}}</td>
+                                                <td>{{l.precio}}</td>
+                                                <td>
+                                                 <a class="btn btn-success" href="{% url 'ventalente' l.id %}" role="button">Vender</a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                        {% endif %}
+                                            {% endfor %}
+                                             
+    
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Marca</th>
+                                                <th>Modelo</th>
+                                                <th>Precio</th>
+                                                <th>Vender</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+{% endblock %}
 </body>
 </html>

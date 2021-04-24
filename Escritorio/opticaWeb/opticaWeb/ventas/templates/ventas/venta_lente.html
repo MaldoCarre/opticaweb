@@ -1,50 +1,31 @@
-<!DOCTYPE html>
 {% extends "core/base.html" %}
 
-<body>
 {% block content %}
-<br>
-<br>
 
-<div class="container mt-5"></div>
+  <div class="row justify-content-center">
+                                <div class="col-md-6 col-xl-8 mt-5">
+                                    <div class="jumbotron border bg-white">
+                                        <div class="container">
+                                        {% for l in lente %}
+                                          <p class="lead text-center">Esta seguro que desea vender el producto {{l.marca}} {{l.modelo}} </p>
+                                          <p class="lead text-center">al precio de ${{l.precio}} ? </p>
+                                          <div class="row">
+                                            <div class="col ">
+                                            <form action="" class="d-flex" method="POST">{% csrf_token %}
+                                                <input type="text" name="lente" id="" value={{l.id}} style="display: none;">
+                                                <button class="btn btn-success ml-auto" href="" role="button">Vender</button>
 
- <table id="tabla" class="table table-bordered bg-transparent my-5" style="width:100%">
-                                        <thead>
-                                            <tr class="bg-primary text-light">
-                                                <th>Codigo</th>
-                                                <th>Marca</th>
-                                                <th>Modelo<th>
-                                                <th>Precio</th>
-                                                <th>Vender</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for l in lentes %}
-                                            <tr>
-                                                <td>{{l.barcode}}</td>
-                                                <td>{{l.marca}}</td>
-                                                <td>{{l.modelo}}</td>
-                                                <td>{{l.precio}}</td>
-                                                <td><div class="row">
-                                                    <div class="col-md-4">
-                                                        <a class="btn btn-success" href="{% url 'edita' l.id %}" role="button">Vender</a>
-                                                    </div>
-                                                    </td>
-                                                  {% endfor %}
-                                            </tr>
-    
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Codigo</th>
-                                                <th>Marca</th>
-                                                <th>Modelo<th>
-                                                <th>Precio</th>
-                                                <th>Vender</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                        {% endfor %}
+                                            </form>
+                                            </div>
+                                            <div class="col">
+                                                <a class="btn btn-secondary ml-2" href="{% url 'carga' %}" role="button">Cancelar</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                                
+                                    </div>
                                 </div>
-{% endblock %}
-</body>
-</html>
+    
+    {% endblock %}

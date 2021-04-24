@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect,reverse
 from.forms import LenteForm,RecetaForm
 from.models import Lente,Receta
 from django.views.generic import UpdateView,DeleteView
+from django.contrib.auth import login, authenticate, logout as do_logout
 # Create your views here.
 
 def principal(request):
@@ -50,7 +51,7 @@ def cargaReceta(request):
         form = RecetaForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('cargaReceta')
+            return redirect('listaReseta')
         else:
             form = LenteForm
             return render (request ,"el formulario no se cargo correctamente")
@@ -76,12 +77,16 @@ class EditaReceta (UpdateView):
         #context['lentes'] =  #whatever you would like
         #return context
     def get_success_url(self):
-        return reverse('cargaReceta')
+        return reverse('listaReseta')
 
 class BorraReceta(DeleteView):
     model = Receta
     template_name='core/borraReceta.html'
     def get_success_url(self):
-        return reverse('cargaReceta')
+        return reverse('listaReseta')
+
+def logout(request):
+    do_logout(request)
+    return redirect('/')
 
 

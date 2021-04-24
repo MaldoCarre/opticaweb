@@ -40,6 +40,7 @@ class Receta (models.Model):
     armazon = models.CharField(max_length=100,blank=True,null=True)
     tam_pel = models.CharField(max_length=50,blank=True,null=True)
     alt_OD = models.CharField(max_length=50,blank=True,null=True)
+    alt_OI = models.CharField(max_length=50,blank=True,null=True)
     distancia = models.CharField(max_length=100,blank=True,null=True)
     material_de_cristal = models.CharField(max_length=100,blank=True,null=True)
     color_cristal = models.CharField(max_length=100,blank=True,null=True)

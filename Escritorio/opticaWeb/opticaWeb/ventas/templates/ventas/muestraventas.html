@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver todas las ventas</title>
-</head>
+{% extends "core/base.html" %}
+{% block tttle %}Muestra ventas{% endblock tttle %}
 <body>
-    <h1>aca listamos todas las ventas y el total </h1>
+{% block content %}
+<br>
+<br>
+
+<div class="container mt-5"></div>
+
+ <table id="tabla" class="table table-bordered bg-transparent my-5" style="width:100%">
+                                        <thead>
+                                            <tr class="bg-primary text-light">
+                                                <th>Codigo</th>
+                                                <th>Producto</th>
+                                                <th>Fecha de venta</th>
+                                                <th>Precio</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for v in ventas_L %}
+                                            <tr>
+                                                <td>{{v.lente.barcode}}</td>
+                                                <td>{{v.lente.marca}}, {{v.lente.modelo}}</td>
+                                                <td>{{v.feca_venta}}</td>
+                                                <td>{{v.lente.precio}}</td>
+                                                
+                                            </tr>
+                                            {% endfor %}
+    
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Producto</th>
+                                                <th>Fecha de venta</th>
+                                                <th>Precio</th>
+                                                
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+{% endblock %}
 </body>
 </html>

@@ -1,5 +1,5 @@
 {% extends "core/base.html" %}
-
+{% block tittle %}Edita receta{% endblock tittle %}Edita receta
 {% block content %}
 
 <div class="row mt-5">
@@ -41,10 +41,7 @@
                         <label for="">Número de Receta</label>
                         <input type="text" class="form-control " id="" name="numero_receta" placeholder="" value = "{{object.numero_receta}}">
                     </div>
-                     <!-- <div class="form-group col-4">
-                        <label for="">Fecha</label>
-                        <input type="date" class="form-control" id="" name="fecha" placeholder="">
-                    </div> -->
+
                  </div>
                     <h4 class="mt-4">Datos de Ojo Derecho</h4>
                     <hr class="my-4">
@@ -68,7 +65,7 @@
                         </div>
                         <div class="form-group col">
                             <label for="">INT</label>
-                            <input type="text" class="form-control" id="" name="d_d_int" placeholder="" value = "{{object.d_int}}">
+                            <input type="text" class="form-control" id="" name="d_d_int" placeholder="" value = "{{object.d_d_int}}">
                         </div>
                        </div>
                        <h4 class="mt-4">Datos de Ojo Izquierdo</h4>
@@ -93,55 +90,99 @@
                         </div>
                         <div class="form-group col">
                             <label for="">INT</label>
-                            <input type="text" class="form-control" id="" name="i_d_int" placeholder="" value = "{{object.i_int}}">
+                            <input type="text" class="form-control" id="" name="i_d_int" placeholder="" value = "{{object.i_d_int}}">
                         </div>
                        </div>
-                       <!-- <h4>Datos Personales</h4>
+                        <h4></h4>
                        <hr class="my-4">
                        <div class="row">
-                        <div class="form-group col">
+                         <div class="form-group col-md-6">
+                            <label for="">Armazón</label>
+                            <input type="text" class="form-control" id="" name="armazon" placeholder="" value="{{object.armazon}}">
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="">Calibrado</label>
-                            <input type="text" class="form-control" id="" name="calibrado" placeholder="">
+                            <input type="text" class="form-control" id="" name="calibrado" placeholder="" value="{{object.calibrado}}">
                         </div>
-                         <div class="form-group col">
-                            <label for="">Armazon</label>
-                            <input type="text" class="form-control" id="" name="armazon" placeholder="">
+                    </div> 
+                    <h4>Cristal</h4>
+                       <hr class="my-4">
+                        <div class="row">
+                        <div class="form-group col-md-1">
+                            <label for="">Tam.Pel</label>
+                            <input type="text" class="form-control" id="" name="tam_pel" placeholder="" value="{{object.tam_pel}}">
                         </div>
-                         <div class="form-group col">
-                            <label for="">Tam_pel</label>
-                            <input type="text" class="form-control" id="" name="tam_pel" placeholder="">
+                        <div class="form-group col-md-1">
+                         <label for="">Alt. OD</label>
+                         <input type="text" class="form-control" id="" name="alt_OD" placeholder="" value="{{object.alt_OD}}">
                         </div>
-                        <div class="form-group col">
-                         <label for="">alt_OD</label>
-                         <input type="text" class="form-control" id="" name="alt_OD" placeholder="">
+                     <div class="form-group col-md-1">
+                         <label for="">Alt. OI</label>
+                         <input type="text" class="form-control" id="" name="alt_OI" placeholder="" value="{{object.alt_OI}}">
                      </div>
-                     <div class="form-group col">
-                         <label for="">Distancia</label>
-                         <input type="text" class="form-control" id="" name="distancia" placeholder="">
-                     </div>
-                     <div class="form-group col">
+                     <div class="form-group col-md-5">
                          <label for="">Material del cristal</label>
-                         <input type="text" class="form-control" id="" name="material_de_cristal" placeholder="">
+                         <select class="form-control"  name="material_de_cristal" >
+                             <option value="{{object.material_de_cristal}}">{{object.material_de_cristal}}</option>
+                             <option value="Orgánico Común">Orgánico Común</option>
+                             <option value="Photo Lite Organico">Photo Lite Organico</option>
+                             <option value="Mineral Blanco">Mineral Blanco</option>
+                             <option value="Mineral Fotocromático">Mineral Fotocromático</option>
+                             <option value="Mineral Flinlite">Mineral Flinlite</option>
+                             <option value="Orgánico Control Blue">Orgánico Control Blue</option>
+                             <option value="Orgánico Con Ar De Stock">Orgánico Con Ar De Stock</option>
+                             <option value="Policarbonato Blanco">Policarbonato Blanco</option>
+                             <option value="Polylite">Polylite</option>
+                             <option value="Amplitude HD Stock">Amplitude HD Stock</option>
+                             <option value="Amplitude Rango Extendido">Amplitude Rango Extendido</option>
+                         </select>
                      </div>
-                     <div class="form-group col">
-                         <label for="">color_cristal</label>
-                         <input type="text" class="form-control" id="" name="color_cristal" placeholder="">
+                     <div class="form-group col-md-4">
+                         <label for="">Color del cristal</label>
+                         <select class="form-control" name="color_cristal"  >
+                             <option value="{{object.color_cristal}}">{{object.color_cristal}}</option>
+                             <option value="Blanco">Blanco</option>
+                             <option value="Fotocromatico">Fotocromatico</option>
+                             <option value="Teñidos">Teñidos</option>
+                         </select>
                      </div>
-                     <div class="form-group col">
-                         <label for="">observacion</label>
-                         <input type="text" class="form-control" id="" name="observacion" placeholder="">
-                     </div>
+                 </div>
+                 <div class="row">
+                      <div class="form-group col-md-12">
+                        <label for="exampleFormControlTextarea1">Distancia</label>
+                        <select class="form-control" name="distancia">
+                            <option value="{{object.distancia}}">{{object.distancia}}</option>
+                            <option value="Monofocal">Monofocal</option>
+                            <option value="Multifocal">Multifocal</option>
+                            <option value="Multifocal/progresivo Sedna">Multifocal/progresivo Sedna</option>
+                            <option value="Multifocal/progresivo Vitfull">Multifocal/progresivo Vitfull</option>
+                            <option value="Multifocal/progresivo Explorer">Multifocal/progresivo Explorer</option>
+                            <option value="Multifocal/progresivo Varilux">Multifocal/progresivo Varilux</option>
+                            <option value="Ocupacional Intervew">Ocupacional Intervew</option>
+                            <option value="Ocupacional Sedna Leader">Ocupacional Sedna Leader</option>
+                            <option value="Ocupacional Sedna Office">Ocupacional Sedna Office</option>
+                            <option value="Bifocal Invisible Amplitude">Bifocal Invisible Amplitude</option>
+                            <option value="Bifocal Flap-Top Amplitude">Bifocal Flap-Top Amplitude</option>
+                            <option value="Bifocal Different">Bifocal Different</option>
+                            <option value="Bifocal Flap-Top Convencional">Bifocal Flap-Top Convencional</option>
+                        </select>
+                      </div>
+                </div>
+                      
+                 <div class="row">
+                      <div class="form-group col-md-12">
+                        <label for="exampleFormControlTextarea1">Observación</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="observacion" rows="4" maxlength="400">{{object.observacion}}</textarea>
+                      </div>
+
                      <div class="form-group col">
                          <label for="">TOTAL $</label>
-                         <input type="text" class="form-control" id="" name="total" placeholder="">
-                     </div> -->
-                        <!-- <div class="row">
-                        
-                        </div> -->
+                         <input type="text" class="form-control" id="" name="total" placeholder="" value="{{object.total}}">
+                     </div> 
+                </div>
                           
-                          </div>
-                          
-                    <button class="btn btn-primary btn-block" type="submit">Cargar</button>
+                    <button class="btn btn-primary btn-block mb-2" type="submit">Actualizar datos</button>
+                    <a class="btn btn-success btn-block" href="{% url 'listaReseta'  %}" >Volver</a>
                 </form>
             </div>
         </div>

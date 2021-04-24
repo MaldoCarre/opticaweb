@@ -1,5 +1,5 @@
 {% extends "core/base.html" %}
-
+{% block tittle %}Carga recetas{% endblock tittle %}
 {% block content %}
 
 <div class="row mt-5">
@@ -15,7 +15,7 @@
     <div class="col-md-12 p-3 my-5">
         <div class="card my-5">
             <div class="card-body bg-light">
-                 <form action="" method="POST">
+            <form action="" method="POST">
                 {% csrf_token %}
                 <h4>Datos Personales</h4>
                 <hr class="my-4">
@@ -50,10 +50,6 @@
                         <label for="">Número de Receta</label>
                         <input type="text" class="form-control " id="" name="numero_receta" placeholder="">
                     </div>
-                     <!-- <div class="form-group col-4">
-                        <label for="">Fecha</label>
-                        <input type="date" class="form-control" id="" name="fecha" placeholder="">
-                    </div> -->
                  </div>
                     <h4 class="mt-4">Datos de Ojo Derecho</h4>
                     <hr class="my-4">
@@ -105,50 +101,92 @@
                             <input type="text" class="form-control" id="" name="i_d_int" placeholder="">
                         </div>
                        </div>
-                       <!-- <h4>Datos Personales</h4>
+                        <h4></h4>
                        <hr class="my-4">
                        <div class="row">
-                        <div class="form-group col">
+                         <div class="form-group col-md-6">
+                            <label for="">Armazón</label>
+                            <input type="text" class="form-control" id="" name="armazon" placeholder="" >
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="">Calibrado</label>
-                            <input type="text" class="form-control" id="" name="calibrado" placeholder="">
+                            <input type="text" class="form-control" id="" name="calibrado" placeholder="" >
                         </div>
-                         <div class="form-group col">
-                            <label for="">Armazon</label>
-                            <input type="text" class="form-control" id="" name="armazon" placeholder="">
-                        </div>
-                         <div class="form-group col">
-                            <label for="">Tam_pel</label>
+                    </div>  
+                    <h4>Cristal</h4>
+                       <hr class="my-4">
+                        <div class="row">
+                        <div class="form-group col-md-1">
+                            <label for="">Tam.Pel</label>
                             <input type="text" class="form-control" id="" name="tam_pel" placeholder="">
                         </div>
-                        <div class="form-group col">
-                         <label for="">alt_OD</label>
+                        <div class="form-group col-md-1">
+                         <label for="">Alt. OD</label>
                          <input type="text" class="form-control" id="" name="alt_OD" placeholder="">
+                        </div>
+                     <div class="form-group col-md-1">
+                         <label for="">Alt. OI</label>
+                         <input type="text" class="form-control" id="" name="alt_OI" placeholder="">
                      </div>
-                     <div class="form-group col">
-                         <label for="">Distancia</label>
-                         <input type="text" class="form-control" id="" name="distancia" placeholder="">
-                     </div>
-                     <div class="form-group col">
+                     <div class="form-group col-md-5">
                          <label for="">Material del cristal</label>
-                         <input type="text" class="form-control" id="" name="material_de_cristal" placeholder="">
+                         <select class="form-control"  name="material_de_cristal">
+                             <option value="">-----</option>
+                             <option>Orgánico Común</option>
+                             <option>Photo Lite Organico</option>
+                             <option>Mineral Blanco</option>
+                             <option>Mineral Fotocromático</option>
+                             <option>Mineral Flinlite</option>
+                             <option>Orgánico Control Blue</option>
+                             <option>Orgánico Con Ar De Stock</option>
+                             <option>Policarbonato Blanco</option>
+                             <option>Polylite</option>
+                             <option>Amplitude HD Stock</option>
+                             <option>Amplitude Rango Extendido</option>
+                         </select>
                      </div>
-                     <div class="form-group col">
-                         <label for="">color_cristal</label>
-                         <input type="text" class="form-control" id="" name="color_cristal" placeholder="">
+                     <div class="form-group col-md-4">
+                         <label for="">Color del cristal</label>
+                         <select class="form-control" name="color_cristal">
+                             <option value="">------</option>
+                             <option>Blanco</option>
+                             <option>Fotocromatico</option>
+                             <option>Teñidos</option>
+                         </select>
                      </div>
-                     <div class="form-group col">
-                         <label for="">observacion</label>
-                         <input type="text" class="form-control" id="" name="observacion" placeholder="">
-                     </div>
+                 </div>
+                 <div class="row">
+                      <div class="form-group col-md-12">
+                        <label for="exampleFormControlTextarea1">Distancia</label>
+                        <select class="form-control" name="distancia">
+                            <option value="">------</option>
+                            <option value="Monofocal">Monofocal</option>
+                            <option value="Multifocal">Multifocal</option>
+                            <option value="Multifocal/progresivo Sedna">Multifocal/progresivo Sedna</option>
+                            <option value="Multifocal/progresivo Vitfull">Multifocal/progresivo Vitfull</option>
+                            <option value="Multifocal/progresivo Explorer">Multifocal/progresivo Explorer</option>
+                            <option value="Multifocal/progresivo Varilux">Multifocal/progresivo Varilux</option>
+                            <option value="Ocupacional Intervew">Ocupacional Intervew</option>
+                            <option value="Ocupacional Sedna Leader">Ocupacional Sedna Leader</option>
+                            <option value="Ocupacional Sedna Office">Ocupacional Sedna Office</option>
+                            <option value="Bifocal Invisible Amplitude">Bifocal Invisible Amplitude</option>
+                            <option value="Bifocal Flap-Top Amplitude">Bifocal Flap-Top Amplitude</option>
+                            <option value="Bifocal Different">Bifocal Different</option>
+                            <option value="Bifocal Flap-Top Convencional">Bifocal Flap-Top Convencional</option>
+                        </select>
+                      </div>
+                </div>
+                 <div class="row">
+                      <div class="form-group col-md-12">
+                        <label for="exampleFormControlTextarea1">Observación</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="observacion" rows="4" maxlength="400"></textarea>
+                      </div>
+
                      <div class="form-group col">
                          <label for="">TOTAL $</label>
                          <input type="text" class="form-control" id="" name="total" placeholder="">
-                     </div> -->
-                        <!-- <div class="row">
-                        
-                        </div> -->
-                          
-                          </div>
+                     </div> 
+                </div>
                           
                     <button class="btn btn-primary btn-block" type="submit">Cargar</button>
                 </form>
@@ -157,7 +195,7 @@
     </div>
 
 </div>
-
+ 
     
 {% endblock %}
 

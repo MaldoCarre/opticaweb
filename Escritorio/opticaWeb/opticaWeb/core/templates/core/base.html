@@ -7,16 +7,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aca cargamos los lentes</title>
+    <title>{% block tittle %}Optica Bari{% endblock tittle %}</title>
     
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{% static 'core/css/aos.css' %}" />
+        <link rel="stylesheet" href="{% static 'core/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'core/css/dataTables.bootstrap4.min.css' %}">
         <link rel="icon" type="image/x-icon" href="../plantillas/assets/img/favicon.png" />
         <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap" rel="stylesheet">
+        <link href="{% static 'core/css/fontcss2.css' %}" rel="stylesheet">
         {% static 'core/stylesheets/styles.css' %}
         {% static 'core/javascripts/scripts.js' %}
 
@@ -34,9 +34,12 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <div class="container">
                                     <ul class="navbar-nav ml-auto mr-lg-5 ">
-                                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'carga' %}">Home </a></li>
-                                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'cargaReceta' %}">Recetas </a></li>
-                                        <li class="nav-item"><a class="nav-link text-white" href="index.html">Stock </a></li>
+                                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'carga' %}">Lentes y Marcos </a></li>
+                                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'cargaReceta' %}">Cargar Recetas </a></li>
+                                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'listaReseta' %}">Lista de Recetas </a></li>
+                                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'listaLentesVender' %}">Vender </a></li>
+                                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'ventas' %}">Ver Ventas </a></li>
+                                        <li class="nav-item"><a class="nav-link text-white" href="{% url 'salir' %}">Cerrar Sesion </a></li>
                                     </ul>
                                 </div>
                                 
@@ -67,12 +70,12 @@
 
 
     <!---Scripts--->
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'core/js/jquery-3.5.1.min.js' %}" crossorigin="anonymous"></script>
+        <script src="{% static 'core/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'core/js/dataTables.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'core/js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
         
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script src="{% static 'core/js/aos.js' %}"></script>
         
 
         <script>

@@ -1,12 +1,12 @@
 {% extends "core/base.html" %}
-
+{% block tittle %}Borra lente de stock{% endblock tittle %}Borra lente de stock
 {% block content %}
 
   <div class="row justify-content-center">
                                 <div class="col-md-6 col-xl-8 mt-5">
                                     <div class="jumbotron border bg-white">
                                         <div class="container">
-                                          <p class="lead text-center">Esta seguro que desea eliminar el producto {{object.marca}}? </p>
+                                          <p class="lead text-center">Esta seguro que desea eliminar el producto {{object.marca}} {{object.modelo}}? </p>
 
                                           <div class="row">
                                             <div class="col ">
